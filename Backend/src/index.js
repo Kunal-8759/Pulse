@@ -4,6 +4,8 @@ const cors = require('cors');
 const heatmapRoute = require('./routes/heatmap');
 const { fetchDailyProblem, fetchUserStats } = require('./utils/leetcodeClient');
 const hackathonsRoute = require('./routes/hackathons');
+const contestsRoute = require('./routes/contests');
+
 
 
 
@@ -16,6 +18,7 @@ app.use('/api/heatmap',heatmapRoute);
 app.get('/problem',fetchDailyProblem);
 app.get('/',fetchUserStats);
 app.use('/api/hackathons',hackathonsRoute);
+app.use('/api/contests', contestsRoute);
 
 
 app.listen(PORT, () => {
