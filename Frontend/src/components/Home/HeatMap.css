@@ -1,0 +1,107 @@
+.heatmap-container{
+    display: flex;
+    flex-direction: row;
+
+}
+.heatmap-card{
+    background-color: var(--card);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 5px;
+    width: 100%;
+    box-shadow: 0 4px 8px var(--shadow-color);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border:1.5px solid var(--border);
+
+}
+.heatmap-title{
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--foreground);
+    margin-bottom: 5px;
+}
+
+.heatmap-description{
+    font-size: 0.8rem;
+    color: var(--muted-foreground);
+    margin-bottom: 20px;
+}
+
+.heatmap-legend{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+.streak-info{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 0.9rem;
+    color: var(--foreground);
+    gap: 10px;
+}
+.more-less-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 0.9rem;
+    color: var(--muted-foreground);
+    gap: 3px;
+}
+
+.circle {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+.color0-leetcode{
+    background-color: #333;
+}
+.color1-leetcode{
+    background-color: rgb(244, 173, 58);
+}
+.color2-leetcode{
+    background-color: rgb(235, 139, 56);
+}
+.color3-leetcode{
+    background-color: rgb(212, 104, 15);
+}
+.color4-leetcode{
+    background-color: rgb(122, 53, 0);
+}
+
+.color0-github{
+    background-color: #333;
+}
+.color1-github{
+    background-color: #d6e685;
+}
+.color2-github{
+    background-color: #8cc665;
+}
+.color3-github{
+    background-color: #44a340;
+}
+.color4-github{
+    background-color: #31a239;
+}
+
+
+
+.react-calendar-heatmap .color-scale-0-github { fill: #333 ; }
+.react-calendar-heatmap .color-scale-1-github { fill: #d6e685; }
+.react-calendar-heatmap .color-scale-2-github { fill: #8cc665; }
+.react-calendar-heatmap .color-scale-3-github { fill: #44a340; }
+.react-calendar-heatmap .color-scale-more-github { fill: #31a239; }
+
+.react-calendar-heatmap .color-scale-0-leetcode { fill: #333; }
+.react-calendar-heatmap .color-scale-1-leetcode { fill: rgb(244, 173, 58); }
+.react-calendar-heatmap .color-scale-2-leetcode { fill: rgb(235, 139, 56); }
+.react-calendar-heatmap .color-scale-3-leetcode { fill: rgb(212, 104, 15); }
+.react-calendar-heatmap .color-scale-more-leetcode { fill: rgb(122, 53, 0); }
+
+
+
