@@ -5,6 +5,8 @@ const heatmapRoute = require('./routes/heatmap');
 const { fetchDailyProblem, fetchUserStats } = require('./utils/leetcodeClient');
 const hackathonsRoute = require('./routes/hackathons');
 const contestsRoute = require('./routes/contests');
+const fetchGitHubCreateEvents = require('./utils/fetchingGithub');
+const fetchLeetCodeRecentSubmissions = require('./utils/fetchLeetcode');
 
 
 
@@ -19,6 +21,9 @@ app.get('/problem',fetchDailyProblem);
 app.get('/',fetchUserStats);
 app.use('/api/hackathons',hackathonsRoute);
 app.use('/api/contests', contestsRoute);
+
+app.get('/github/:username', fetchGitHubCreateEvents);
+app.get('/leetcode/:username',fetchLeetCodeRecentSubmissions) ;
 
 
 app.listen(PORT, () => {
