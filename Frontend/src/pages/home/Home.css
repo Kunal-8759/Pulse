@@ -1,0 +1,13 @@
+
+.home-heatmap{
+    margin-bottom:1rem;
+    margin-top: 1rem;
+}
+
+.home-cards{
+    display:flex;
+    flex-direction:row;
+    gap: 1rem;
+    justify-content:space-between;
+
+}

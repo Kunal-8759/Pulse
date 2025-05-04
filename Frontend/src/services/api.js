@@ -22,3 +22,11 @@ export const getDailyProblem= ()=>{
   return axios.get('http://localhost:5000/api/heatmap/dailyProblem');
 }
 
+export const getLeetcodeActivity = (username) => {
+  return axios.get(`http://localhost:5000/leetcode/${username}`);
+}
+
+export const getGithubActivity = (username) => {
+  return axios.get(`http://localhost:5000/github/${username}`);
+}
+
