@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import { NightParticles } from './NightParticles';
 import Home from './pages/home/Home';
+import Task from './pages/task/Task';
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
   <Router>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/tasks" element={<Task />} />
       </Routes>
     </Router>
   </div>

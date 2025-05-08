@@ -1,0 +1,212 @@
+/* Card.css - Styles for task cards */
+.task-card {
+  background-color: var(--card);
+  border-radius: 0.5rem;
+  padding: 1.25rem;
+  box-shadow: 0 2px 4px var(--shadow-color);
+  transition: box-shadow 0.2s, transform 0.2s;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+  max-width: 350px;
+  border: 0.5px solid var(--border);
+}
+
+.task-card:hover {
+  box-shadow: 0 4px 8px var(--shadow-color);
+  transform: translateY(-2px);
+}
+
+.task-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.status-toggle {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  border: 2px solid var(--primary);
+  background: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 0.75rem;
+  cursor: pointer;
+  flex-shrink: 0;
+  margin-top: 0.125rem;
+}
+
+.status-toggle.completed {
+  background-color: var(--primary);
+}
+
+.task-title {
+  flex: 1;
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.task-link {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.link-icon {
+  font-size: 0.875rem;
+}
+
+.task-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.edit-btn,
+.delete-btn {
+  background: none;
+  border: none;
+  color: var(--muted-foreground);
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+  transition: background-color 0.2s;
+}
+
+.edit-btn:hover,
+.delete-btn:hover {
+  background-color: var();
+}
+
+.edit-icon,
+.delete-icon {
+  font-size: 0.875rem;
+}
+
+.task-link-url {
+  color: var(--primary);
+  text-decoration: none;
+  font-size: 0.875rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
+
+.task-link-url:hover {
+  text-decoration: underline;
+}
+
+.task-description {
+  color: var(--muted-foreground);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+.task-date {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--muted-foreground);
+  font-size: 0.875rem;
+}
+
+.date-icon {
+  font-size: 0.875rem;
+}
+
+.reminder-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 0.375rem;
+  padding: 0.5rem 0.75rem;
+  color: var(--foreground);
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  width: fit-content;
+}
+
+.reminder-btn:hover {
+  background-color: var(--hover);
+}
+
+.reminder-icon {
+  font-size: 0.875rem;
+}
+
+.task-footer {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  width: fit-content;
+}
+
+.status-todo {
+  background-color: var(--primary);
+  color: var(--foreground);
+}
+
+.status-progress {
+  background-color: var(--progress);
+  color: var(--foreground);
+}
+
+.status-completed {
+  background-color: var(--success);
+  color: var(--foreground); 
+}
+
+.task-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+/* ✅ RESPONSIVENESS */
+@media screen and (max-width: 600px) {
+  .task-card {
+    padding: 1rem;
+    max-width: 100%;
+  }
+
+  .task-title {
+    font-size: 1rem;
+  }
+
+  .task-link-url {
+    font-size: 0.8rem;
+  }
+
+  .task-description {
+    font-size: 0.8rem;
+  }
+
+  .reminder-btn {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.75rem;
+  }
+}
