@@ -1,0 +1,95 @@
+/* ContestCard.css */
+
+.contest-card {
+    background-color: #0f172a;
+    color: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    width: 300px;
+  }
+  
+  .contest-tags {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+  
+  .tagu {
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 999px;
+  }
+  
+  .platform-tagu {
+    background-color: #eec214; 
+    color: black;
+  }
+
+  .upcoming-tagu {
+    background-color: #2563eb; /* blue-600 */
+    color: white;
+  }
+  
+  .title-tag {
+    background-color: #374151;
+  }
+  
+  .contest-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  
+  .contest-info {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+  
+  .emoji {
+    margin-right: 8px;
+  }
+  
+  .countdown-box {
+    background-color: #1e293b;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    margin: 12px 0;
+  }
+  
+  .countdown-time {
+    font-size: 18px;
+    display: block;
+  }
+  
+  .contest-buttons {
+    display: flex;
+    gap: 12px;
+  }
+  
+  .join-btn,
+  .remind-btn {
+    flex: 1;
+    font-size: 14px;
+    color: white;
+    background-color: #2563eb; /* blue-600 */
+    padding: 6px 12px;
+    border-radius: 6px;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+  }
+  
+  .join-btn:hover {
+    background-color: #1d4ed8; /* blue-700 */
+  }
+  
+  .remind-btn {
+    cursor: not-allowed;
+  }
+  

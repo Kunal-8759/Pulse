@@ -1,0 +1,43 @@
+/* ContestList.css */
+
+.contest-list-container{
+    height: 100vh;
+}
+
+.contest-wrapper {
+    /* height: 100vh; */
+    /* overflow-y: scroll; */
+    background-color: #293247;
+  }
+  
+  .contest-heading {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 1rem;
+    color: white;
+  }
+  
+  .contest-grid {
+    max-width: 1120px; /* equivalent to max-w-7xl */
+    margin: 0 auto;
+    padding: 0 1rem;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(1, 1fr);
+    justify-items: center;
+  }
+  
+  /* Media queries for responsiveness */
+  @media (min-width: 640px) {
+    .contest-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .contest-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
