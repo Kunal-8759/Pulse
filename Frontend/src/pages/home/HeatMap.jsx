@@ -123,7 +123,6 @@ function Home() {
   return (
     <>
       <div className="home">
-      <h1>Welcome to the kkCode Home Page!</h1>
 
       {errorMessage && (
         <p style={{ color: "red", fontWeight: "bold" }}>{errorMessage}</p>

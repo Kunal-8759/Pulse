@@ -11,3 +11,35 @@
     justify-content:space-between;
 
 }
+
+.home-footer{
+    display:flex;
+    flex-direction:row;
+    gap: 1rem;
+    justify-content:space-between;
+    margin-top: 1rem;
+    margin-bottom: 5px;
+    padding: 1.5rem 3rem;
+    border-radius: 12px;
+    border: 1.5px solid var(--border);
+    background-color: var(--card);
+    opacity: 0.7;
+    box-shadow: 0 8px 16px var(--shadow-color);
+    transition: all 0.2s ease;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color:var(--muted-foreground);
+}
+.home-footer-content{
+    display:flex;
+    flex-direction:row;
+    gap: 3px;
+    justify-content:space-between;
+}
+.home-footer a{
+    color: var(--foreground);
+    text-decoration: underline;
+    font-size: 0.9rem;
+    font-weight: 500;
+
+}

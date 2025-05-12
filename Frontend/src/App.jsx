@@ -7,6 +7,7 @@ import AccountIntegration from './pages/setting/AccountIntegration';
 import Task from './pages/task/Task';
 import Contests from './pages/contest/Contests';
 import Hackathons from './pages/hackathon/Hackathons';
+import Navbar from './components/Navbar/Navbar';
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
 
 <div className="app-root ">
   <NightParticles />
+  <Navbar />
 
   <div className=''>
   <Router>
