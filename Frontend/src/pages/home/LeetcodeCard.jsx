@@ -41,25 +41,9 @@ const LeetCodeCard = () => {
   }
 
   // Use fallback data if the API calls fail
-  const data = leetCodeData.data || {
-    total: 3521,
-    totalSolved: 150,
-    easyTotal: 873,
-    easySolved: 53,
-    mediumTotal: 1826,
-    mediumSolved: 88,
-    hardTotal: 822,
-    hardSolved: 9,
-  }
+  const data = leetCodeData.data ;
 
-  const problem = dailyProblem.data || {
-    title: "Count Equal and Divisible Pairs in an Array",
-    difficulty: "Easy",
-    link: "https://leetcode.com/problems/count-equal-and-divisible-pairs-in-an-array/",
-    frontendId: "2176",
-    topicTags: ["Array"],
-    acRate: 82.0,
-  }
+  const problem = dailyProblem.data ;
 
   return (
     <div className="leetcode-card">

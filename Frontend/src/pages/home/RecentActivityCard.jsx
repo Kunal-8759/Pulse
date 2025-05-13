@@ -10,8 +10,8 @@ import { getGithubActivity, getLeetcodeActivity } from "../../services/api"
 
 const RecentActivityCard = () => {
   const [activeTab, setActiveTab] = useState("all")
-  const [leetcodeData, setLeetCodeData]= useState(null);
-  const [githubData,setGitHubData ]= useState(null);
+  const [leetcodeData, setLeetCodeData]= useState([]);
+  const [githubData,setGitHubData ]= useState([]);
   // Combine and sort data by date (most recent first)
 
   useEffect(() => {
@@ -21,17 +21,16 @@ const RecentActivityCard = () => {
 
     const fetchData = async () => {
         try {
-            // Call your functions to get the data
+          if(leetcodeUsername){
             const leetcode = await getLeetcodeActivity(leetcodeUsername);
-            const github = await getGithubActivity(githubUsername);
-
-            console.log("LeetCode  Data111:", leetcode.data);
-            console.log("github Data111:", github.data.events);
-
             setLeetCodeData(leetcode.data)
+          }
+          if(githubUsername){
+            const github = await getGithubActivity(githubUsername);
             setGitHubData(github.data.events)
+          }
         } catch (error) {
-            console.error("Error fetching LeetCode data:", error);
+          console.error("Error fetching LeetCode data:", error);
         }
     }
 

@@ -73,10 +73,10 @@ function calculateStreaks(submissionCalendarString) {
 function Home() {
   const [githubData, setGitHubData] = useState(null);
   const [leetcodeData, setLeetCodeData] = useState(null);
-  const [errorMessage, setErrorMessage] = useState("");
   const [leetCodeStreaks, setLeetCodeStreaks] = useState({ currentStreak: 0, maxStreak: 0 });
   const [githubStreaks, setGitHubStreaks] = useState({ currentStreak: 0, maxStreak: 0 });
-
+  const [gitError, setGitError] = useState(null);
+  const [leetError, setLeetError] = useState(null);
 
   useEffect(() => {
     const githubUsername = localStorage.getItem("githubUsername");
@@ -85,19 +85,17 @@ function Home() {
     console.log("GitHub Username:", githubUsername);
     console.log("LeetCode Username:", leetcodeUsername);
 
-    if (!githubUsername && !leetcodeUsername) {
-      setErrorMessage("Please enter your GitHub and LeetCode profile in settings.");
-      return;
-    }
-
     const fetchHeatmaps = async () => {
       try {
         if (githubUsername) {
           const githubRes = await getGitHubHeatmap(githubUsername);          
-          console.log("GitHub Heatmap Data:", githubRes.data);
-          setGitHubData(githubRes.data);
-          const streaks = calculateStreaks(JSON.stringify(githubRes.data));
+          setGitHubData(githubRes.data.data);
+          const streaks = calculateStreaks(JSON.stringify(githubRes.data.data));
           setGitHubStreaks(streaks);
+        }else{
+          setGitHubData({});
+          setGitHubStreaks({ currentStreak: 0, maxStreak: 0 });
+          setGitError("Please update your GitHub profile in Settings.");
         }
 
         if (leetcodeUsername) {
@@ -106,14 +104,13 @@ function Home() {
           setLeetCodeData(leetcodeRes.data.submissionCalendar);
           const streaks = calculateStreaks(JSON.stringify(leetcodeRes.data.submissionCalendar));
           setLeetCodeStreaks(streaks);
-        }
-
-        if (!githubUsername || !leetcodeUsername) {
-          setErrorMessage("Some profiles are missing. Please update them in settings.");
+        }else{
+          setLeetCodeData({});
+          setLeetCodeStreaks({ currentStreak: 0, maxStreak: 0 });
+          setLeetError("Please update your LeetCode profile in Settings.");
         }
       } catch (err) {
         console.error(err);
-        setErrorMessage("Something went wrong while fetching heatmap data.");
       }
     };
 
@@ -124,13 +121,21 @@ function Home() {
     <>
       <div className="home">
 
-      {errorMessage && (
-        <p style={{ color: "red", fontWeight: "bold" }}>{errorMessage}</p>
-      )}
-
       <div className="heatmap-container">
-        {leetcodeData && <Heatmap data={leetcodeData} isUnix={true} platform="leetcode" streaks={leetCodeStreaks} />}
-        {githubData && <Heatmap data={githubData} isUnix={false} platform="github" streaks={githubStreaks}/>}
+        <Heatmap
+          data={leetcodeData || {}}
+          isUnix={true}
+          platform="leetcode"
+          streaks={leetCodeStreaks}
+          error={leetError}
+        />
+        <Heatmap
+          data={githubData || {}}
+          isUnix={false}
+          platform="github"
+          streaks={githubStreaks}
+          error={gitError}
+        />
       </div>
 
       </div>

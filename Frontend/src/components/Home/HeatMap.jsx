@@ -4,7 +4,7 @@ import "react-calendar-heatmap/dist/styles.css";
 import { format, fromUnixTime } from "date-fns";
 import "./HeatMap.css";
 
-const Heatmap = ({ data, isUnix , platform , streaks}) => {
+const Heatmap = ({ data, isUnix , platform , streaks ,error }) => {
   const values = Object.keys(data).map((key) => ({
     date: isUnix ? format(fromUnixTime(Number(key)), "yyyy-MM-dd") : key,
     count: data[key],
@@ -15,6 +15,11 @@ const Heatmap = ({ data, isUnix , platform , streaks}) => {
     <div className="heatmap-card">
       <h2 className="heatmap-title">{ platform=="leetcode" ? "LeetCode Activity" : "GitHub Contributions"}</h2>
       <p className="heatmap-description">{ platform=="leetcode" ? "Your coding progress on LeetCode" : "Your GitHub activity" }</p>
+      {error && (
+        <p style={{ color: "red", fontWeight: "bold", marginBottom: "10px", fontSize:"1rem" }}>
+          {error}
+        </p>
+      )}
       <CalendarHeatmap
       startDate={new Date(new Date().setFullYear(new Date().getFullYear() - 1))}
       endDate={new Date()}
