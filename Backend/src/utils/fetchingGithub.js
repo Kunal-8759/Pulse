@@ -3,10 +3,18 @@ const { GITHUB_TOKEN } = require("../config/config"); // or hardcode if testing
 
 const fetchGitHubEventActivity = async (req,res) => {
   const token = GITHUB_TOKEN;
-    const username = req.params.username; // Get the username from the request parameters
+  const username = req.params.username; 
   console.log("Fetching GitHub event activity for:", username);
 
   try {
+
+
+    await axios.get(`https://api.github.com/users/${username}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "User-Agent": "request",
+      },
+    });
     const response = await axios.get(`https://api.github.com/users/${username}/events/public`, {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -75,15 +83,19 @@ const fetchGitHubEventActivity = async (req,res) => {
     });
 
     return res.json(
-        { events: formattedEvents,
-          
-
-
-        }
+        { events: formattedEvents}
     );
   } catch (err) {
-    console.error("Error fetching GitHub events:", err.message);
-    throw new Error("Failed to fetch GitHub events");
+    if (err.response && err.response.status === 404) {
+      console.warn("GitHub user not found:", username);
+      return res.json({ events: []});
+    }
+
+    console.error("Error fetching GitHub events:", err);
+    return res.status(500).json({
+      events: [],
+      error: "Failed to fetch GitHub events",
+    });
   }
 };
 

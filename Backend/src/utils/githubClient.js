@@ -1,5 +1,5 @@
 const axios = require('axios');
-const { GITHUB_TOKEN } = require("../config/config") // or hardcode if testing
+const { GITHUB_TOKEN } = require("../config/config");
 
 const fetchGitHubActivity = async (username) => {
   
@@ -33,7 +33,18 @@ const fetchGitHubActivity = async (username) => {
       { headers: { Authorization: `Bearer ${token}` } }
     );
 
-    const days = response.data.data.user.contributionsCollection.contributionCalendar.weeks.flatMap(
+    const user = response.data.data.user;
+
+    //checking for invalid user
+    if (!user) {
+      console.warn(`GitHub user "${username}" not found.`);
+      return {
+        calendarData: {},
+        error: "GitHub profile not found. Please check your username.",
+      };
+    }
+
+    const days = user.contributionsCollection.contributionCalendar.weeks.flatMap(
       (week) => week.contributionDays
     );
 
@@ -45,10 +56,11 @@ const fetchGitHubActivity = async (username) => {
     }
     }catch (err) {
       console.error("Error fetching GitHub activity:", err);
-      throw new Error("Failed to fetch GitHub activity");
-    }
-
-  
+      return {
+      calendarData: {},
+      error: "Failed to fetch GitHub activity due to network/API error.",
+      };
+    } 
 };
 
 module.exports = fetchGitHubActivity;
