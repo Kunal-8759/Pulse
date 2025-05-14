@@ -179,3 +179,15 @@ background-color: var(--progress);
 .progress-fill.hard {
 background-color: var(--destructive);
 }
+
+.caution{
+    display: flex;
+    padding:1rem;
+    align-items: center;
+    justify-content: center;
+    margin:0.5rem 0;
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    color:red
+   
+}

@@ -13,10 +13,8 @@ function calculateStreaks(submissionCalendarString) {
     let timestamp;
 
     if (!isNaN(key)) {
-      // UNIX timestamp (already in seconds)
       timestamp = parseInt(key, 10);
     } else {
-      // "YYYY-MM-DD" string — manually parse as UTC midnight
       const [year, month, day] = key.split("-").map(Number);
       const date = new Date(Date.UTC(year, month - 1, day));
       timestamp = Math.floor(date.getTime() / 1000);
@@ -33,7 +31,7 @@ function calculateStreaks(submissionCalendarString) {
     return { currentStreak: 0, maxStreak: 0 };
   }
 
-  // --- MAX STREAK ---
+  // MAX STREAK
   let maxStreak = 1;
   let tempStreak = 1;
   for (let i = 1; i < days.length; i++) {
@@ -45,7 +43,7 @@ function calculateStreaks(submissionCalendarString) {
     }
   }
 
-  // --- CURRENT STREAK ---
+  // CURRENT STREAK
   const now = new Date();
   const todayUTC = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate());
   let checkDay = Math.floor(todayUTC / 1000);
@@ -70,7 +68,7 @@ function calculateStreaks(submissionCalendarString) {
 
 
 
-function Home() {
+function HeatMaps() {
   const [githubData, setGitHubData] = useState(null);
   const [leetcodeData, setLeetCodeData] = useState(null);
   const [leetCodeStreaks, setLeetCodeStreaks] = useState({ currentStreak: 0, maxStreak: 0 });
@@ -100,8 +98,8 @@ function Home() {
 
         if (leetcodeUsername) {
           const leetcodeRes =  await getLeetCodeData(leetcodeUsername);
-          
           setLeetCodeData(leetcodeRes.data.submissionCalendar);
+          setLeetError(leetcodeRes.data.error);
           const streaks = calculateStreaks(JSON.stringify(leetcodeRes.data.submissionCalendar));
           setLeetCodeStreaks(streaks);
         }else{
@@ -110,7 +108,7 @@ function Home() {
           setLeetError("Please update your LeetCode profile in Settings.");
         }
       } catch (err) {
-        console.error(err);
+        console.log(err);
       }
     };
 
@@ -144,4 +142,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default HeatMaps;

@@ -12,7 +12,6 @@ const RecentActivityCard = () => {
   const [activeTab, setActiveTab] = useState("all")
   const [leetcodeData, setLeetCodeData]= useState([]);
   const [githubData,setGitHubData ]= useState([]);
-  // Combine and sort data by date (most recent first)
 
   useEffect(() => {
 
@@ -23,7 +22,7 @@ const RecentActivityCard = () => {
         try {
           if(leetcodeUsername){
             const leetcode = await getLeetcodeActivity(leetcodeUsername);
-            setLeetCodeData(leetcode.data)
+            setLeetCodeData(leetcode.data.data)
           }
           if(githubUsername){
             const github = await getGithubActivity(githubUsername);
@@ -40,7 +39,6 @@ const RecentActivityCard = () => {
   const combineAndSortData = () => {
     const combinedData = []
 
-    // Process LeetCode data
     leetcodeData?.forEach((item) => {
       combinedData.push({
         ...item,
@@ -49,7 +47,6 @@ const RecentActivityCard = () => {
       })
     })
 
-    // Process GitHub data
     githubData?.forEach((item) => {
       combinedData.push({
         ...item,

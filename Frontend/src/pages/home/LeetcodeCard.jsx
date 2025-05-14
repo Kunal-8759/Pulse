@@ -6,9 +6,9 @@ import { getLeetCodeData,getDailyProblem } from "../../services/api"
 
 
 const LeetCodeCard = () => {
-  const [leetCodeData, setLeetCodeData] = useState(null)
-  const [dailyProblem, setDailyProblem] = useState(null)
-  const [loading, setLoading] = useState(true)
+  const [leetCodeData, setLeetCodeData] = useState({})
+  const [dailyProblem, setDailyProblem] = useState({})
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
 
@@ -16,14 +16,13 @@ const LeetCodeCard = () => {
 
     const fetchData = async () => {
       try {
-        // Call your functions to get the data
-        const statsData = await getLeetCodeData(leetcodeUsername);
+        if(leetcodeUsername){
+          const statsData = await getLeetCodeData(leetcodeUsername);
+          console.log("LeetCode Stats Data:", statsData.data);
+          setLeetCodeData(statsData)
+        }
         const problemData = await getDailyProblem();
-
-        console.log("LeetCode Stats Data:", statsData.data);
         console.log("LeetCode Daily Problem Data:", problemData.data);
-
-        setLeetCodeData(statsData)
         setDailyProblem(problemData)
         setLoading(false)
       } catch (error) {
@@ -35,12 +34,10 @@ const LeetCodeCard = () => {
     fetchData()
   }, [])
 
-  // Show loading state while fetching data
   if (loading) {
     return <div className="leetcode-card loading">Loading LeetCode data...</div>
   }
 
-  // Use fallback data if the API calls fail
   const data = leetCodeData.data ;
 
   const problem = dailyProblem.data ;
@@ -79,58 +76,65 @@ const LeetCodeCard = () => {
 
       <h3 className="progress-title">Your LeetCode Progress</h3>
 
-      <div className="progress-item">
-        <div className="progress-label">
-          <span>Total</span>
-          <span className="progress-count">
-            {data.totalSolved} / {data.total}
-          </span>
-        </div>
-        <div className="progress-bar">
-          <div className="progress-fill total" style={{ width: `${(data.totalSolved / data.total) * 100}%` }}></div>
-        </div>
-      </div>
+      {
+        !data || data.error ?
+        <div className="caution">Kindly update your LeetCode Profile</div>
+        :
+        <>
+          <div className="progress-item">
+          <div className="progress-label">
+            <span>Total</span>
+            <span className="progress-count">
+              {data.totalSolved} / {data.total}
+            </span>
+          </div>
+          <div className="progress-bar">
+            <div className="progress-fill total" style={{ width: `${(data.totalSolved / data.total) * 100}%` }}></div>
+          </div>
+          </div>
 
-      <div className="progress-item">
-        <div className="progress-label">
-          <span>Easy</span>
-          <span className="progress-count">
-            {data.easySolved} / {data.easyTotal}
-          </span>
-        </div>
-        <div className="progress-bar">
-          <div className="progress-fill easy" style={{ width: `${(data.easySolved / data.easyTotal) * 100}%` }}></div>
-        </div>
-      </div>
+          <div className="progress-item">
+            <div className="progress-label">
+              <span>Easy</span>
+              <span className="progress-count">
+                {data.easySolved} / {data.easyTotal}
+              </span>
+            </div>
+            <div className="progress-bar">
+              <div className="progress-fill easy" style={{ width: `${(data.easySolved / data.easyTotal) * 100}%` }}></div>
+            </div>
+          </div>
 
-      <div className="progress-item">
-        <div className="progress-label">
-          <span>Medium</span>
-          <span className="progress-count">
-            {data.mediumSolved} / {data.mediumTotal}
-          </span>
-        </div>
-        <div className="progress-bar">
-          <div
-            className="progress-fill medium"
-            style={{ width: `${(data.mediumSolved / data.mediumTotal) * 100}%` }}
-          ></div>
-        </div>
-      </div>
+          <div className="progress-item">
+            <div className="progress-label">
+              <span>Medium</span>
+              <span className="progress-count">
+                {data.mediumSolved} / {data.mediumTotal}
+              </span>
+            </div>
+            <div className="progress-bar">
+              <div
+                className="progress-fill medium"
+                style={{ width: `${(data.mediumSolved / data.mediumTotal) * 100}%` }}
+              ></div>
+            </div>
+          </div>
 
-      <div className="progress-item">
-        <div className="progress-label">
-          <span>Hard</span>
-          <span className="progress-count">
-            {data.hardSolved} / {data.hardTotal}
-          </span>
-        </div>
-        <div className="progress-bar">
-          <div className="progress-fill hard" style={{ width: `${(data.hardSolved / data.hardTotal) * 100}%` }}></div>
-        </div>
-      </div>
+          <div className="progress-item">
+            <div className="progress-label">
+              <span>Hard</span>
+              <span className="progress-count">
+                {data.hardSolved} / {data.hardTotal}
+              </span>
+            </div>
+            <div className="progress-bar">
+              <div className="progress-fill hard" style={{ width: `${(data.hardSolved / data.hardTotal) * 100}%` }}></div>
+            </div>
+          </div>
+        </>
+      }
     </div>
   )
 }
 
-export default LeetCodeCard
+export default LeetCodeCard;

@@ -6,7 +6,17 @@ const fetchLeetCodeRecentSubmissions = async ( req,res ) => {
   const username = req.params.username // Replace with the desired username
   const limit=10;
 
-  const query = `
+  // Query to check if user exists
+  const checkUserQuery = `
+    query getUserProfile($username: String!) {
+      matchedUser(username: $username) {
+        username
+      }
+    }
+  `;
+
+
+  const submissionsQuery = `
     query getUserProfile($username: String!, $limit: Int!) {
       recentSubmissionList(username: $username, limit: $limit) {
         title
@@ -18,14 +28,28 @@ const fetchLeetCodeRecentSubmissions = async ( req,res ) => {
     }
   `;
 
-  const variables = {
-    username,
-    limit,
-  };
 
   try {
-    const response = await axios.post(url, { query, variables });
-    const submissions = response.data.data.recentSubmissionList;
+
+     // Step 1: Check if user exists
+    const userCheckResponse = await axios.post(url, {
+      query: checkUserQuery,
+      variables: { username },
+    });
+
+    const userExists = userCheckResponse.data.data.matchedUser;
+
+    if (!userExists) {
+      return res.json({ error: "User not found on LeetCode." , data : []});
+    }
+
+    // Step 2: Fetch recent submissions
+    const submissionsResponse = await axios.post(url, {
+      query: submissionsQuery,
+      variables: { username, limit },
+    });
+
+    const submissions = submissionsResponse.data.data.recentSubmissionList;
 
     const formatDate = (ts) => {
       const date = new Date(parseInt(ts) * 1000);
@@ -55,9 +79,10 @@ const fetchLeetCodeRecentSubmissions = async ( req,res ) => {
       ago: timeAgo(s.timestamp),
     }));
 
-    return res.json(submission);
+    return res.json({ data:submission , error : "" });
+
   } catch (err) {
-    console.error("Error fetching LeetCode submissions:", err.message);
+    console.error("Error fetching LeetCode submissions:", err);
   }
 };
 

@@ -61,7 +61,11 @@ export const GitHubActivity = ({ activity }) => {
 export const ActivityList = ({ activities }) => {
   return (
     <div className="activity-list">
-      {activities.map((activity, index) => (
+      {
+        activities.length==0 ? 
+          <div className="caution">No data is available </div>
+        :
+        (activities.map((activity, index) => (
         <div key={index} className="activity-item">
           {activity.platform === "LeetCode" ? (
             <LeetCodeActivity activity={activity} />
@@ -69,7 +73,8 @@ export const ActivityList = ({ activities }) => {
             <GitHubActivity activity={activity} />
           )}
         </div>
-      ))}
+        )))
+      } 
     </div>
   )
 }

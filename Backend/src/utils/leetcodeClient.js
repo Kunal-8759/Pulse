@@ -36,7 +36,17 @@ const fetchDailyProblem = async () => {
 };
 
 const fetchUserStats = async (username) => {
-    const query = `query userProfile($username: String!) {
+
+  // Query to check if user exists
+  const checkUserQuery = `
+    query getUserProfile($username: String!) {
+      matchedUser(username: $username) {
+        username
+      }
+    }
+  `;
+
+    const profileQuery = `query userProfile($username: String!) {
       allQuestionsCount {
         difficulty
         count
@@ -54,15 +64,30 @@ const fetchUserStats = async (username) => {
         }
       }
     }`;
+
+
+     // Step 1: Check if user exists
+    const userCheckResponse = await axios.post(graphqlURL, {
+      query: checkUserQuery,
+      variables: { username },
+    });
+
+
+    const userExists = userCheckResponse.data.data.matchedUser;
+    if (!userExists) {
+      return {
+        error:"Leetcode Profile not found.Please check your username."
+      }
+    }
+
+    //step 2 : fetch profile data
   
-    const variables = { username };
-  
-    const response = await axios.post(graphqlURL, {
-      query,
-      variables,
+    const profileResponse  = await axios.post(graphqlURL, {
+      query : profileQuery,
+      variables : {username},
     });
   
-    const data = response.data.data;
+    const data = profileResponse.data.data;
   
     const all = data.allQuestionsCount;
     const solved = data.matchedUser.submitStats.acSubmissionNum;
@@ -81,6 +106,7 @@ const fetchUserStats = async (username) => {
       hardTotal: getCount(all, 'Hard'),
       hardSolved: getCount(solved, 'Hard'),
       submissionCalendar: JSON.parse(submissionCalendar),
+      error:"",
     };
   };
   
