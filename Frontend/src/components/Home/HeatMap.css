@@ -42,10 +42,17 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    font-size: var(--text-md);
     justify-content: center;
+    font-size: var(--text-md);
     color: var(--foreground);
-    gap: 0.625rem;
+    gap: 16px;
+}
+.streak-info > div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
 }
 .more-less-container{
     display: flex;
@@ -65,47 +72,47 @@
     background-color: #333;
 }
 .color1-leetcode{
-    background-color: rgb(244, 173, 58);
+    background-color: rgb(180, 70, 6);
 }
 .color2-leetcode{
-    background-color: rgb(235, 139, 56);
+    background-color: rgb(184, 92, 5);
 }
 .color3-leetcode{
-    background-color: rgb(212, 104, 15);
+    background-color: rgb(235, 139, 56);
 }
 .color4-leetcode{
-    background-color: rgb(122, 53, 0);
+    background-color: rgb(244, 163, 58);
 }
 
 .color0-github{
     background-color: #333;
 }
 .color1-github{
-    background-color: #d6e685;
+    background-color: #016620;
 }
 .color2-github{
-    background-color: #8cc665;
+    background-color: #109932;
 }
 .color3-github{
-    background-color: #44a340;
+    background-color: #1cb33d;
 }
 .color4-github{
-    background-color: #31a239;
+    background-color: #51d164;
 }
 
 
 
 .react-calendar-heatmap .color-scale-0-github { fill: #333 ; }
-.react-calendar-heatmap .color-scale-1-github { fill: #d6e685; }
-.react-calendar-heatmap .color-scale-2-github { fill: #8cc665; }
-.react-calendar-heatmap .color-scale-3-github { fill: #44a340; }
-.react-calendar-heatmap .color-scale-more-github { fill: #31a239; }
+.react-calendar-heatmap .color-scale-1-github { fill: #016620; }
+.react-calendar-heatmap .color-scale-2-github { fill: #109932; }
+.react-calendar-heatmap .color-scale-3-github { fill: #1cb33d; }
+.react-calendar-heatmap .color-scale-more-github { fill: #51d164; }
 
 .react-calendar-heatmap .color-scale-0-leetcode { fill: #333; }
-.react-calendar-heatmap .color-scale-1-leetcode { fill: rgb(244, 173, 58); }
-.react-calendar-heatmap .color-scale-2-leetcode { fill: rgb(235, 139, 56); }
-.react-calendar-heatmap .color-scale-3-leetcode { fill: rgb(212, 104, 15); }
-.react-calendar-heatmap .color-scale-more-leetcode { fill: rgb(122, 53, 0); }
+.react-calendar-heatmap .color-scale-1-leetcode { fill: rgb(180, 70, 6); }
+.react-calendar-heatmap .color-scale-2-leetcode { fill: rgb(184, 92, 5); }
+.react-calendar-heatmap .color-scale-3-leetcode { fill: rgb(235, 139, 56); }
+.react-calendar-heatmap .color-scale-more-leetcode { fill: rgb(244, 163, 58); }
 
 
 

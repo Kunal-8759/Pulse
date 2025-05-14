@@ -76,7 +76,7 @@ const fetchUserStats = async (username) => {
     const userExists = userCheckResponse.data.data.matchedUser;
     if (!userExists) {
       return {
-        error:"Leetcode Profile not found.Please check your username."
+        error:"LeetCode profile not found.Please check your username."
       }
     }
 

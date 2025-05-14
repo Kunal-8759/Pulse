@@ -88,6 +88,7 @@ function HeatMaps() {
         if (githubUsername) {
           const githubRes = await getGitHubHeatmap(githubUsername);          
           setGitHubData(githubRes.data.data);
+          setGitError(githubRes.data.error);
           const streaks = calculateStreaks(JSON.stringify(githubRes.data.data));
           setGitHubStreaks(streaks);
         }else{
