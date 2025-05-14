@@ -63,7 +63,7 @@
     display: flex;
     align-items:center ;
     gap: 10px;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
   }
   .repo-name{
     font-size:12px;
@@ -175,24 +175,16 @@
     font-size: 13px;
     color: var(--muted-foreground);
     margin-top: 4px;
+    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
   }
   
   /* Responsive adjustments */
   @media (max-width: 768px) {
     .activity-content {
-      flex-direction: column;
+      flex-direction: row;
       gap: 8px;
-    }
-  
-    .activity-time {
-      align-items: flex-start;
-      margin-top: 8px;
-      text-align: left;
     }
   
     .activity-icon {
@@ -205,10 +197,3 @@
       max-width: 100%;
     }
   }
-  
-  @media (max-width: 480px) {
-    .activity-item {
-      padding: 12px 16px;
-    }
-  }
-  

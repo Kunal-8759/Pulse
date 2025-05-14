@@ -43,3 +43,12 @@
     font-weight: 500;
 
 }
+
+@media(max-width:1024px){
+    .home-cards{
+        flex-direction:column;
+        gap: 1rem;
+        justify-content:space-between;
+    }
+
+}

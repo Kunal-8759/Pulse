@@ -1,47 +1,51 @@
 .heatmap-container{
     display: flex;
     flex-direction: row;
+    gap:1rem;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin:0 auto;
 
 }
 .heatmap-card{
     background-color: var(--card);
-    border-radius: 10px;
-    padding: 20px;
-    margin: 5px;
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
     width: 100%;
     box-shadow: 0 4px 8px var(--shadow-color);
     transition: all 0.3s ease;
-    cursor: pointer;
     border:1.5px solid var(--border);
 
 }
 .heatmap-title{
-    font-size: 1.5rem;
+    font-size: var(--text-lg);
     font-weight: 600;
     color: var(--foreground);
-    margin-bottom: 5px;
+    margin-bottom: 0.35rem;
 }
 
 .heatmap-description{
-    font-size: 0.8rem;
+    font-size: var(--text-md);
     color: var(--muted-foreground);
-    margin-bottom: 20px;
+    margin-bottom: 1.25rem;
 }
 
 .heatmap-legend{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin-top: 20px;
-    margin-bottom: 10px;
+    margin-top: 1.25rem;
+    margin-bottom: 0.2rem;
 }
 .streak-info{
     display: flex;
     flex-direction: row;
     align-items: center;
-    font-size: 0.9rem;
+    font-size: var(--text-md);
+    justify-content: center;
     color: var(--foreground);
-    gap: 10px;
+    gap: 0.625rem;
 }
 .more-less-container{
     display: flex;
@@ -105,3 +109,16 @@
 
 
 
+@media (max-width: 857px) {
+    .heatmap-container{
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap:1rem;
+        width:100%;
+        margin:0 auto;
+    }
+    .heatmap-card{
+        width: 100%;
+    }
+}
