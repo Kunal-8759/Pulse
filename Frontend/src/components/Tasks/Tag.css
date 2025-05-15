@@ -3,11 +3,15 @@
     display: inline-flex;
     align-items: center;
     gap: 0.25rem;
-    background-color: var(--secondary);
-    border-radius: 1rem;
+    border-radius: var(--border-radius);
     padding: 0.25rem 0.75rem;
     font-size: 0.75rem;
     color: var(--foreground);
+    border : 1.5px solid var(--border);
+  }
+
+.tag:hover {
+    background-color: var(--hover);
   }
   
   .tag-text {

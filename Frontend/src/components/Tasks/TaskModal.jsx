@@ -10,7 +10,7 @@ const TaskModal = ({ onClose, onSave, task }) => {
   const [link, setLink] = useState("")
   const [dueDate, setDueDate] = useState("")
   const [dueTime, setDueTime] = useState("")
-  const [status, setStatus] = useState("To Do")
+  const [status, setStatus] = useState("ToDo")
   const [tagInput, setTagInput] = useState("")
   const [tags, setTags] = useState([])
   const [titleError, setTitleError] = useState(false)
@@ -147,7 +147,7 @@ const TaskModal = ({ onClose, onSave, task }) => {
             <label htmlFor="status">Status</label>
             <select id="status" value={status} onChange={(e) => setStatus(e.target.value)}>
               <option value="To Do">To Do</option>
-              <option value="In Progress">In Progress</option>
+              <option value="In Progress">InProgress</option>
               <option value="Completed">Completed</option>
             </select>
           </div>

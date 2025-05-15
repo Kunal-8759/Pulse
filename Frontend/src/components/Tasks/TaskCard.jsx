@@ -9,7 +9,7 @@ const TaskCard = ({ task, onEdit, onDelete, onCycleStatus }) => {
     switch (status) {
       case "Completed":
         return "status-completed"
-      case "In Progress":
+      case "InProgress":
         return "status-progress"
       default:
         return "status-todo"
@@ -20,8 +20,8 @@ const TaskCard = ({ task, onEdit, onDelete, onCycleStatus }) => {
     switch (status) {
       case "Completed":
         return "COMPLETED"
-      case "In Progress":
-        return "IN PROGRESS"
+      case "InProgress":
+        return "IN_PROGRESS"
       default:
         return "TODO"
     }
@@ -63,7 +63,7 @@ const TaskCard = ({ task, onEdit, onDelete, onCycleStatus }) => {
     <div className="task-card">
       <div className="task-header">
         <button
-          className={`status-toggle ${status === "Completed" ? "completed" : ""}`}
+          className={`status-toggle ${status}`}
           onClick={onCycleStatus}
           aria-label="Toggle task status"
         >
@@ -72,41 +72,48 @@ const TaskCard = ({ task, onEdit, onDelete, onCycleStatus }) => {
 
         <h3 className="task-title">
           {title}
-          {link && (
-            <a href={link} target="_blank" rel="noopener noreferrer" className="task-link">
-              <span className="link-icon">🔗</span>
-            </a>
-          )}
         </h3>
 
         <div className="task-actions">
           <button className="edit-btn" onClick={onEdit} aria-label="Edit task">
-            <span className="edit-icon">✏️</span>
+            <span className="edit-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen h-4 w-4" ><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"></path></svg>
+            </span>
           </button>
           <button className="delete-btn" onClick={onDelete} aria-label="Delete task">
-            <span className="delete-icon">🗑️</span>
+            <span className="delete-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2 h-4 w-4" ><path d="M3 6h18"></path><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path><line x1="10" x2="10" y1="11" y2="17"></line><line x1="14" x2="14" y1="11" y2="17"></line></svg>
+            </span>
           </button>
         </div>
       </div>
 
       {link && (
-        <a href={link} target="_blank" rel="noopener noreferrer" className="task-link-url">
-          {link}
-        </a>
+        <div className="task-link">
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link h-3 w-3"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+          <a href={link} target="_blank" rel="noopener noreferrer" className="task-link-url">
+            {link}
+          </a>
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-external-link h-3 w-3 flex-shrink-0"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg>
+        </div>
       )}
 
       {description && <p className="task-description">{description}</p>}
 
       {dueDate && (
         <div className="task-date">
-          <span className="date-icon">🕒</span>
+          <span className="date-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock h-4 w-4"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          </span>
           {formatDateTime()}
         </div>
       )}
 
       {dueDate && dueTime && (
         <button className="reminder-btn" onClick={handleSetReminder}>
-          <span className="reminder-icon">📅</span>
+          <span className="reminder-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar h-3 w-3 mr-1"><path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M3 10h18"></path></svg>
+          </span>
           Set Reminder
         </button>
       )}
