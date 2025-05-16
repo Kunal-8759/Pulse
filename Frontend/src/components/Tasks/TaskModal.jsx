@@ -15,7 +15,6 @@ const TaskModal = ({ onClose, onSave, task }) => {
   const [tags, setTags] = useState([])
   const [titleError, setTitleError] = useState(false)
 
-  // If editing a task, populate the form with its data
   useEffect(() => {
     if (task) {
       setTitle(task.title || "")
@@ -31,7 +30,6 @@ const TaskModal = ({ onClose, onSave, task }) => {
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    // Validate title
     if (!title.trim()) {
       setTitleError(true)
       return
@@ -120,7 +118,9 @@ const TaskModal = ({ onClose, onSave, task }) => {
             <label htmlFor="dueDate">Due Date & Time</label>
             <div className="date-time-container">
               <div className="date-input">
-                <span className="input-icon">📅</span>
+                <span className="input-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar mr-2 h-4 w-4"><path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M3 10h18"></path></svg>
+                </span>
                 <input
                   type="date"
                   id="dueDate"
@@ -130,7 +130,9 @@ const TaskModal = ({ onClose, onSave, task }) => {
                 />
               </div>
               <div className="time-input">
-                <span className="input-icon">⏰</span>
+                <span className="input-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock mr-2 h-4 w-4"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                </span>
                 <input
                   type="time"
                   id="dueTime"
