@@ -1,7 +1,8 @@
 /* App.css - Main application styles */
 
 .task-page {
-  padding: 1.5rem 1.5rem;
+  width:95%;
+  margin : 1.5rem auto;
 }
 
 .task-header {
@@ -278,7 +279,7 @@
 
 .task-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 1.5rem;
 }
 
@@ -303,8 +304,8 @@
   .search-box {
     max-width: none;
   }
-
-  /* .section-header {
+/* 
+  .section-header {
     flex-direction: column;
     align-items: flex-start;
     gap: 1.5rem;

@@ -9,29 +9,28 @@ import Contests from './pages/contest/Contests';
 import Hackathons from './pages/hackathon/Hackathons';
 import Navbar from './components/Navbar/Navbar';
 
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+const queryClient = new QueryClient();
+
 
 function App() {
   return (
+      <QueryClientProvider client={queryClient}>
+        
+      <div className="app-root">
+        <NightParticles />
+        <Navbar />
 
-
-<div className="app-root ">
-  <NightParticles />
-  <Navbar />
-
-  <div className=''>
-  <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/settings" element={<AccountIntegration />} />
-        <Route path="/tasks" element={<Task />} />
-        <Route path="/contests" element={<Contests />} />
-        <Route path="/hackathons" element={<Hackathons />} />
-      </Routes>
-    </Router>
-  </div>
-</div>
-
-  );
-}
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/settings" element={<AccountIntegration />} />
+          <Route path="/tasks" element={<Task />} />
+          <Route path="/contests" element={<Contests />} />
+          <Route path="/hackathons" element={<Hackathons />} />
+          <Route path="/revision" element={<Home />} />
+        </Routes>
+      </div>
+      </QueryClientProvider>
+)}
 
 export default App;
