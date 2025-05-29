@@ -42,6 +42,12 @@ const Hackathon = () => {
 
   return (
     <>
+    <div className="hackathon-header">
+      <h1 className="hackathon-title">Hackathons</h1>
+      <p className="hackathon-description">
+        Explore hackathons from multiple platforms
+      </p>
+    </div>
     <HackathonSort 
       locationFilter={locationFilter}
       setLocationFilter={setLocationFilter}

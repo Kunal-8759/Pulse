@@ -6,4 +6,19 @@
     gap:1.5rem;
 
   }
+
+.hackathon-header{
+    width:95%;
+    margin: 0 auto;
+}
+.hackathon-header h1 {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--foreground);
+}
+.hackathon-header p {
+    color: var(--muted-foreground);
+    font-size: var(--text-sm);
+    margin-bottom: 2px;
+}
   

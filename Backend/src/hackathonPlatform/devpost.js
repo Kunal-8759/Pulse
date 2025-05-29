@@ -19,7 +19,7 @@ async function getDevpostHackathon(){
 
     const hackathons = totalData.map(hackathon => ({
         thumbnail: hackathon.thumbnail_url,
-        title: hackathon.name,
+        title: hackathon.title,
         organizer: hackathon.organization_name,
         submissionPeriod : hackathon.submission_period_dates,
         location : hackathon.displayed_location.location,
@@ -29,6 +29,8 @@ async function getDevpostHackathon(){
         url: hackathon.url,
         platform: 'Devpost',
     }));
+
+    console.log(hackathons);
 
     return hackathons;
 }

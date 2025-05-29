@@ -119,7 +119,7 @@ const Task = () => {
               <div className="filter-options">
                 {["All", "ToDo", "InProgress", "Completed"].map((status) => (
                   <div
-                    key={status}
+                    key={status}    
                     className={`filter-option ${statusFilter === status ? "selected" : ""}`}
                     onClick={() => {
                       setStatusFilter(status)

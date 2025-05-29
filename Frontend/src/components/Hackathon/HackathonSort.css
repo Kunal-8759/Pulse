@@ -4,75 +4,73 @@
   align-items: center;
   width:95%;
   margin:0 auto;
-  margin-bottom: 1.5rem;
+  margin: 1rem 1.5rem 1.5rem 1.5rem;
+  border:1.5px solid var(--border);
+  border-radius: var(--border-radius);
+  padding: 8px 16px;
+  background: var(--card);
 }
 
 .location-filter {
   display: flex;
-  background: var(--card);
+  background: var(--secondary);
   border-radius: var(--border-radius);
-  padding: 4px;
+  /* padding: 4px; */
   border: 1.5px solid var(--border);
+  padding: 2px 2px;
+  gap: 0.6rem;
 }
 
 .filter-btn {
-  background: transparent;
-  border: 1px solid var(--border);
+  background: var(--secondary);
+  color: var(--muted-foreground);
+  border: 1.5px solid var(--border);
+  border-radius: var(--border-radius);
   padding: 8px 16px;
-  border-radius: 24px;
   cursor: pointer;
-  color: var(--foreground);
   font-weight: 500;
   display: flex;
   align-items: center;
   gap: 6px;
-  transition: all 0.2s ease;
 }
 
 .filter-btn.active {
-  background: var(--primary);
-  color: var(--primary-foreground);
+  background: var(--card);
+  color: var(--foreground);
 }
 
-.filter-btn:hover:not(.active) {
-  background: var(--muted);
-}
-
-.icon {
-  font-size: 1rem;
-}
-
-.sort-filter {
+.sort-filter-hackathon {
   display: flex;
+  justify-content: center;
   align-items: center;
   gap: 8px;
+  white-space: nowrap;
 }
 
-.sort-filter label {
-  color: var(--foreground);
+.sort-filter-hackathon label {
+  color: var(--muted-foreground);
   font-weight: 500;
+  margin-bottom: 0;
 }
 
 .sort-select {
   background: var(--card);
   color: var(--foreground);
-  border: 1px solid var(--border);
+  border: 1.5px solid var(--border);
   padding: 8px 12px;
-  border-radius: 6px;
+  border-radius: var(--border-radius);
   cursor: pointer;
   font-weight: 500;
-  appearance: none;
-  padding-right: 30px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 8px center;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 700px) {
   .hackathon-filter-container {
     flex-direction: column;
     gap: 16px;
     align-items: stretch;
+    width: 95%;
+    margin:1rem auto;
+    /* margin: 1rem 1.5rem 1.5rem 1.5rem; */
   }
   
   .location-filter {

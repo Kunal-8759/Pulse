@@ -1,4 +1,3 @@
-import React from "react";
 import "./HackathonSort.css";
 
 const HackathonSort = ({ 
@@ -28,16 +27,16 @@ const HackathonSort = ({
           className={`filter-btn ${locationFilter === "online" ? "active" : ""}`}
           onClick={() => handleLocationChange("online")}
         >
-          <span className="icon">🌐</span> Online
+          Online
         </button>
         <button 
           className={`filter-btn ${locationFilter === "in-person" ? "active" : ""}`}
           onClick={() => handleLocationChange("in-person")}
         >
-          <span className="icon">📍</span> In Person
+          In Person
         </button>
       </div>
-      <div className="sort-filter">
+      <div className="sort-filter-hackathon">
         <label htmlFor="sort-select">Sort by:</label>
         <select 
           id="sort-select" 
