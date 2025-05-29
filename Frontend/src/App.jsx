@@ -8,6 +8,7 @@ import Task from './pages/task/Task';
 import Contests from './pages/contest/Contests';
 import Hackathons from './pages/hackathon/Hackathons';
 import Navbar from './components/Navbar/Navbar';
+import RevisionPreparation from './components/Revision/RevisionPreparation';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 const queryClient = new QueryClient();
@@ -27,7 +28,7 @@ function App() {
           <Route path="/tasks" element={<Task />} />
           <Route path="/contests" element={<Contests />} />
           <Route path="/hackathons" element={<Hackathons />} />
-          <Route path="/revision" element={<Home />} />
+          <Route path="/revision" element={<RevisionPreparation />} />
         </Routes>
       </div>
       </QueryClientProvider>
