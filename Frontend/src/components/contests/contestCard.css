@@ -1,12 +1,13 @@
 /* ContestCard.css */
 
 .contest-card {
-    background-color: #0f172a;
-    color: white;
-    padding: 20px;
-    border-radius: 12px;
+    background-color:var(--card);
+    border:1.5px solid var(--border);
+    border-radius: var(--border-radius);
+    padding: 1rem 1.5rem;
+
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-    width: 300px;
+    min-width: 300px;
   }
   
   .contest-tags {
@@ -16,9 +17,9 @@
   }
   
   .tagu {
-    font-size: 12px;
+    font-size: var(--text-sm);
     padding: 4px 8px;
-    border-radius: 999px;
+    border-radius: var(--border-radius);
   }
   
   .platform-tagu {
@@ -31,39 +32,44 @@
     color: white;
   }
   
-  .title-tag {
-    background-color: #374151;
+  /* .title-tagu {
+    background-color:var(--secondary);
+    color: var(--foreground);
+    border:1.5px solid var(--border);
+
   }
-  
+   */
   .contest-title {
-    font-size: 16px;
+    font-size: var(--text-base);
     font-weight: 600;
-    margin-bottom: 10px;
+    margin-bottom: 16px;
   }
   
   .contest-info {
     display: flex;
     align-items: center;
-    font-size: 14px;
+    font-size: var(--text-md);
     margin-bottom: 8px;
   }
   
   .emoji {
     margin-right: 8px;
+    color:var(--primary);
   }
   
   .countdown-box {
-    background-color: #1e293b;
-    padding: 10px;
-    border-radius: 8px;
+    /* background-color: var(--secodary); */
+    padding: 8px;
+    border-radius: var(--border-radius);
     text-align: center;
-    font-size: 14px;
+    font-size: var(--text-md);
     font-weight: 500;
     margin: 12px 0;
+    border:1.5px solid var(--border);
   }
   
   .countdown-time {
-    font-size: 18px;
+    font-size: var(--text-md);
     display: block;
   }
   
@@ -75,14 +81,22 @@
   .join-btn,
   .remind-btn {
     flex: 1;
-    font-size: 14px;
-    color: white;
-    background-color: #2563eb; /* blue-600 */
-    padding: 6px 12px;
-    border-radius: 6px;
+    font-size: var(--text-md);
+    font-weight: 500;
+    background-color:var(--primary); /* blue-600 */
+    padding: 6px 8px;
+    border-radius: var(--border-radius);
     text-align: center;
     text-decoration: none;
     border: none;
+  }
+
+  .join-btn {
+    color: black;
+  }
+  .remind-btn {
+    color:var(--foreground);
+    font-weight: 500;
   }
   
   .join-btn:hover {
@@ -90,6 +104,18 @@
   }
   
   .remind-btn {
-    cursor: not-allowed;
+
   }
+
+.join-contest-svg{
+    margin-right: 4px;
+    position:relative;
+    top: 2px;
+}
+.remind-me-svg{
+    margin-right: 4px;
+    position:relative;
+    top: 2px;
+}
+
   

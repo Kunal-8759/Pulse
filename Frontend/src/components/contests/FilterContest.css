@@ -1,0 +1,144 @@
+.filter-contests-container {
+    background-color: var(--card);
+    border: 1.5px solid var(--border);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    width: 100%;
+    min-width: 300px;
+    height:350px;
+    position: sticky;
+    top: 60px;
+    height:auto;
+    overflow-y: auto;
+
+}
+
+.filter-heading {
+  font-size: var(--text-base);
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: var(--foreground);
+}
+
+.filters-section {
+  background-color: var(--card);
+  border-radius: var(--border-radius);
+  border: 1.5px solid var(--border);
+  padding: 16px;
+  margin-bottom: 12px;
+}
+
+.filters-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.filter-icon {
+  margin-right: 8px;
+  color: #3b82f6;
+}
+
+.filters-title {
+  font-weight: 600;
+  font-size: var(--text-base);
+  color: #f8fafc;
+}
+
+.filter-group {
+  margin-bottom: 16px;
+}
+
+.filter-group-title {
+  font-size: var(--text-md);
+  color: var(--muted-foreground);
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.platform-buttons,
+.status-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.platform-button,
+.status-button {
+  padding: 6px 12px;
+  border-radius: var(--border-radius);
+  font-size: var(--text-sm);
+  background-color: var(--card);
+  color: var(--foreground);
+  border: 1.5px solid var(--border);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.platform-button.active,
+.status-button.active {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.platform-button.codeforces.active {
+  background-color: var(--primary);
+    color: black;
+    font-weight: 500;
+}
+
+.platform-button.codechef.active {
+  background-color: #f18f06;
+  color:black;
+    font-weight: 500;
+}
+
+.platform-button.leetcode.active {
+  background-color: #eec214;
+    color: black;
+    font-weight: 500;
+}
+
+.filter-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.refresh-button,
+.reset-button {
+  padding: 10px;
+  border-radius: var(--border-radius);
+  font-size: var(--text-sm);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex: 1;
+}
+
+.refresh-button {
+  background-color: var(--card);
+  color: var(--foreground);
+    border: 1.5px solid var(--border);
+    border-radius: var(--border-radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.refresh-icon {
+  margin-right: 8px;
+}
+
+.reset-button {
+  background-color: transparent;
+  color: var(--muted-foreground);
+  border: 1.5px solid var(--border);
+}
+
+.refresh-button:hover {
+  background-color: #334155;
+}
+
+.reset-button:hover {
+  color: var(--foreground);
+}

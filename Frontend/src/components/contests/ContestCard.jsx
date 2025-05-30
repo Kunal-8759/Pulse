@@ -33,14 +33,16 @@ const ContestCard = ({ contest }) => {
       <div className="contest-tags">
         <span className="tagu platform-tagu">{contest.platform}</span>
         <span className="tagu upcoming-tagu">{timeLeft < 0 ? <p>Past</p> : <p>Upcoming</p> }</span>
-        <span className="tagu title-tagu">{contest.platform == "LeetCode" ? contest.title.split(" ")[0] : ""}</span>
+        <span className="tagu title-tagu">{contest.platform == "LeetCode" ? contest.title.split(" ")[0] : undefined}</span>
       </div>
 
       <h2 className="contest-title">{contest.title}</h2>
 
       <div className="contest-info">
-        <span className="emoji">📅</span>
-        <span><strong>Start:</strong> {formattedDate}</span>
+        <span className="emoji">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar h-4 w-4 text-primary mt-0.5 flex-shrink-0"><path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M3 10h18"></path></svg>
+        </span>
+        <span><strong>Start : </strong> {formattedDate}</span>
       </div>
 
       <div className="countdown-box">
@@ -49,7 +51,9 @@ const ContestCard = ({ contest }) => {
       </div>
 
       <div className="contest-info">
-        <span className="emoji">⏱️</span>
+        <span className="emoji">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock h-4 w-4 text-primary mt-0.5 flex-shrink-0"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        </span>
         <span><strong>Duration:</strong> {contest.duration / 60} mins</span>
       </div>
 
@@ -60,13 +64,14 @@ const ContestCard = ({ contest }) => {
           rel="noreferrer"
           className="join-btn"
         >
-          🏆 Join Contest
+          <span className='join-contest-svg'><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trophy h-3.5 w-3.5"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path></svg></span>
+          Join Contest
         </a>
         <button
-          disabled
           className="remind-btn"
-        >
-          🔔 Remind Me
+        > 
+          <span className='remind-me-svg'><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bell h-3.5 w-3.5"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path></svg></span>
+          Remind Me
         </button>
       </div>
     </div>

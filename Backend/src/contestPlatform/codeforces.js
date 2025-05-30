@@ -13,8 +13,6 @@ async function getCodeforcesContests() {
         duration: contest.durationSeconds,
         url: `https://codeforces.com/contests/${contest.id}`,
     }));
-
-    console.log(contests);
     
     return contests;
 }

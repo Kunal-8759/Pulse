@@ -12,6 +12,8 @@ router.get('/', async (req, res) => {
     const codeforces = await getCodeforcesContests();
 
     res.json([ ...leetcode , ... codeforces , ...codechef]); 
+
+    console.log('Contests fetched successfully',[ ...leetcode , ... codeforces , ...codechef]);
     
   } catch (error) {
     console.error('Error fetching contests:', error.message);

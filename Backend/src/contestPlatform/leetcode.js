@@ -11,7 +11,6 @@ const fetchLeetCodeContests = async () => {
     duration: contest.duration,
     url: `https://leetcode.com/contest/${contest.titleSlug}`
   }));
-  console.log('LeetCode contests fetched successfully!', result);
   return result;
 };
 
