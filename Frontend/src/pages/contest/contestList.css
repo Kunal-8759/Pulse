@@ -1,5 +1,12 @@
 /* ContestList.css */
 
+.contest-list-title{
+  font-size:var(--text-lg);
+  font-weight: 800;
+  margin:1rem 0;
+  padding:0 2rem;
+}
+
   .contest-list-container{
     width: 100%;
     margin:0 auto;

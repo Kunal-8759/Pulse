@@ -1,7 +1,8 @@
 import axios from 'axios';
 
-export const fetchContests = async() => {
-  return await axios.get('http://localhost:5000/api/contests');
+export const fetchContests = async(page,limit) => {
+  const res = await axios.get(`http://localhost:5000/api/contests?page=${page}&limit=${limit}`);
+  return res.data;
 };
 
 export const fetchHackathons = async()=>{
