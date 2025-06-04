@@ -160,11 +160,11 @@ font-size: var(--text-sm);
 color: var(--muted-foreground);
 }
 
-.progress-bar {
+.progress-bar-leetcode {
 height: 6px;
 background-color: var(--secondary);
 border-radius: 12px;
-overflow: hidden;
+/* overflow: hidden; */
 }
 
 .progress-fill {

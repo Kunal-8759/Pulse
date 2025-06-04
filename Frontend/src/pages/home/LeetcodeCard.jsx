@@ -88,7 +88,7 @@ const LeetCodeCard = () => {
               {data.totalSolved} / {data.total}
             </span>
           </div>
-          <div className="progress-bar">
+          <div className="progress-bar-leetcode">
             <div className="progress-fill total" style={{ width: `${(data.totalSolved / data.total) * 100}%` }}></div>
           </div>
           </div>
@@ -100,7 +100,7 @@ const LeetCodeCard = () => {
                 {data.easySolved} / {data.easyTotal}
               </span>
             </div>
-            <div className="progress-bar">
+            <div className="progress-bar-leetcode">
               <div className="progress-fill easy" style={{ width: `${(data.easySolved / data.easyTotal) * 100}%` }}></div>
             </div>
           </div>
@@ -112,7 +112,7 @@ const LeetCodeCard = () => {
                 {data.mediumSolved} / {data.mediumTotal}
               </span>
             </div>
-            <div className="progress-bar">
+            <div className="progress-bar-leetcode">
               <div
                 className="progress-fill medium"
                 style={{ width: `${(data.mediumSolved / data.mediumTotal) * 100}%` }}
@@ -127,7 +127,7 @@ const LeetCodeCard = () => {
                 {data.hardSolved} / {data.hardTotal}
               </span>
             </div>
-            <div className="progress-bar">
+            <div className="progress-bar-leetcode">
               <div className="progress-fill hard" style={{ width: `${(data.hardSolved / data.hardTotal) * 100}%` }}></div>
             </div>
           </div>
