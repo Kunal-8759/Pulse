@@ -28,10 +28,38 @@ const ContestCard = ({ contest }) => {
     timeZoneName: 'short',
   });
 
+const handleSetReminder = () => {
+  const contestStartDate = new Date(contest.startTime * 1000)
+  const year = contestStartDate.getFullYear()
+  const month = String(contestStartDate.getMonth() + 1).padStart(2, '0')
+  const day = String(contestStartDate.getDate()).padStart(2, '0')
+  const hours = String(contestStartDate.getHours()).padStart(2, '0')
+  const minutes = String(contestStartDate.getMinutes()).padStart(2, '0')
+  
+  const startDate = `${year}${month}${day}`
+  const startTime = `${hours}${minutes}00`
+    
+  const contestEndDate = new Date(contest.startTime * 1000 + contest.duration * 1000)
+  const endHours = String(contestEndDate.getHours()).padStart(2, '0')
+  const endMinutes = String(contestEndDate.getMinutes()).padStart(2, '0')
+  const endTime = `${endHours}${endMinutes}00`
+  
+  
+  const eventTitle = `${contest.platform}: ${contest.title}`
+  const eventDescription = `Contest: ${contest.title}
+Platform: ${contest.platform}
+Duration: ${Math.floor(contest.duration / 3600)}h ${Math.floor((contest.duration % 3600) / 60)}m
+Contest Link: ${contest.url}`
+  
+  const calendarUrl = `https://calendar.google.com/calendar/u/0/r/eventedit?text=${encodeURIComponent(eventTitle)}&details=${encodeURIComponent(eventDescription)}&dates=${startDate}T${startTime}/${startDate}T${endTime}&location=${encodeURIComponent(contest.url)}`
+  
+  window.open(calendarUrl, "_blank")
+}
+
   return (
     <div className="contest-card">
       <div className="contest-tags">
-        <span className="tagu platform-tagu">{contest.platform}</span>
+        <span className={`tagu ${contest.platform.toLowerCase()}-tag`}>{contest.platform}</span>
         <span className="tagu upcoming-tagu">
           {(() => {
             const currentTime = Math.floor(Date.now() / 1000);
@@ -102,7 +130,8 @@ const ContestCard = ({ contest }) => {
           Join Contest
         </a>
         <button
-          className="remind-btn"
+          className="remind-btn-contest"
+          onClick={handleSetReminder}
         > 
           <span className='remind-me-svg'><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bell h-3.5 w-3.5"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path></svg></span>
           Remind Me

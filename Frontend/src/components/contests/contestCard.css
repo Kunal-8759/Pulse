@@ -5,10 +5,15 @@
     border:1.5px solid var(--border);
     border-radius: var(--border-radius);
     padding: 1rem 1.5rem;
-
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
     min-width: 300px;
   }
+
+.contest-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px  var(--shadow-color);
+}
   
   .contest-tags {
     display: flex;
@@ -22,14 +27,23 @@
     border-radius: var(--border-radius);
   }
   
-  .platform-tagu {
-    background-color: #eec214; 
-    color: black;
+  .leetcode-tag{
+    color: rgb(255 161 22 / var(--tw-text-opacity, 1));
+    border:1px solid rgb(255 161 22 / var(--tw-text-opacity, 0.8));
+  }
+  .codeforces-tag{
+    color:rgb(17 149 245 / var(--tw-text-opacity, 1));
+    border:1.5px solid rgb(17 149 245 / var(--tw-text-opacity, 0.8));
+  }
+  .codechef-tag{
+    color:rgb(200 93 7 / var(--tw-text-opacity, 1));
+    border: 1.5px solid rgb(200 93 7 / var(--tw-text-opacity, 0.8))
   }
 
   .upcoming-tagu {
-    background-color: #2563eb; /* blue-600 */
-    color: white;
+    color: var(--foreground);
+    border:0.5px solid var(--foreground);
+
   }
   
   /* .title-tagu {
@@ -79,10 +93,11 @@
   }
   
   .join-btn,
-  .remind-btn {
+  .remind-btn-contest {
     flex: 1;
     font-size: var(--text-md);
     font-weight: 500;
+    color:black;
     background-color:var(--primary); /* blue-600 */
     padding: 6px 8px;
     border-radius: var(--border-radius);
@@ -91,20 +106,13 @@
     border: none;
   }
 
-  .join-btn {
-    color: black;
-  }
-  .remind-btn {
-    color:var(--foreground);
-    font-weight: 500;
-  }
   
   .join-btn:hover {
     background-color: #1d4ed8; /* blue-700 */
   }
   
-  .remind-btn {
-
+  .remind-btn-contest:hover {
+     background-color: #1d4ed8; /* blue-700 */
   }
 
 .join-contest-svg{

@@ -83,19 +83,19 @@
 }
 
 .platform-button.codeforces.active {
-  background-color: var(--primary);
+  background-color:rgb(17 149 245 / var(--tw-text-opacity, 1));
     color: black;
     font-weight: 500;
 }
 
 .platform-button.codechef.active {
-  background-color: #f18f06;
+  background-color: rgb(200 93 7 / var(--tw-text-opacity, 1));
   color:black;
     font-weight: 500;
 }
 
 .platform-button.leetcode.active {
-  background-color: #eec214;
+  background-color:  rgb(255 161 22 / var(--tw-text-opacity, 1));
     color: black;
     font-weight: 500;
 }
