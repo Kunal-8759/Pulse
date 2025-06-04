@@ -1,5 +1,5 @@
 import React from 'react';
-import './ContestCard.css'; // <- Import your CSS file
+import './contestCard.css'; // <- Import your CSS file
 
 const ContestCard = ({ contest }) => {
   const formatTime = (sec) => {
