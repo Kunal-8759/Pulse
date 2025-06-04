@@ -1,9 +1,10 @@
 "use client"
 import "./FilterContest.css"
 
-const FilterContest = ({ contests, filters, setFilters }) => {
+const FilterContest = ({ filters, setFilters , page ,setPage }) => {
   // Get unique platforms from contests
-  const platforms = [...new Set(contests.map((contest) => contest.platform))]
+  const platforms = ['LeetCode', 'Codeforces', 'CodeChef'];
+  const statuses = ["All", "Upcoming", "Ongoing", "Past"];
 
   // Toggle platform selection
   const togglePlatform = (platform) => {
@@ -11,7 +12,11 @@ const FilterContest = ({ contests, filters, setFilters }) => {
       ? filters.selectedPlatforms.filter((p) => p !== platform)
       : [...filters.selectedPlatforms, platform]
 
-    setFilters({ ...filters, selectedPlatforms: newPlatforms })
+    setFilters({ ...filters, selectedPlatforms: newPlatforms });
+
+  }
+  const toggleStatus = (status) => {
+    setFilters({ ...filters, selectedStatus: status });
   }
 
   // Reset all filters
@@ -21,6 +26,11 @@ const FilterContest = ({ contests, filters, setFilters }) => {
       selectedStatus: "All",
     })
   }
+
+  const handleRefresh = () => {
+  setFilters({ ...filters });
+}
+
 
   return (
     <div className="filter-contests-container">
@@ -60,36 +70,21 @@ const FilterContest = ({ contests, filters, setFilters }) => {
         <div className="filter-group">
           <h3 className="filter-group-title">Status</h3>
           <div className="status-buttons">
-            <button
-              className={`status-button ${filters.selectedStatus === "All" ? "active" : ""}`}
-              onClick={() => setFilters({ ...filters, selectedStatus: "All" })}
-            >
-              All
-            </button>
-            <button
-              className={`status-button ${filters.selectedStatus === "Upcoming" ? "active" : ""}`}
-              onClick={() => setFilters({ ...filters, selectedStatus: "Upcoming" })}
-            >
-              Upcoming
-            </button>
-            <button
-              className={`status-button ${filters.selectedStatus === "Ongoing" ? "active" : ""}`}
-              onClick={() => setFilters({ ...filters, selectedStatus: "Ongoing" })}
-            >
-              Ongoing
-            </button>
-            <button
-              className={`status-button ${filters.selectedStatus === "Past" ? "active" : ""}`}
-              onClick={() => setFilters({ ...filters, selectedStatus: "Past" })}
-            >
-              Past
-            </button>
+            {statuses.map((status) => (
+              <button
+                key={status}
+                className={`status-button ${filters.selectedStatus === status ? "active" : ""}`}
+                onClick={() => toggleStatus(status)}
+              >
+                {status}
+              </button>
+            ))}
           </div>
         </div>
       </div>
 
       <div className="filter-actions">
-        <button className="refresh-button">
+        <button className="refresh-button" onClick={handleRefresh}>
           <span className="refresh-icon">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path

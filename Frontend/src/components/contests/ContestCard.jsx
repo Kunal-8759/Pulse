@@ -16,7 +16,7 @@ const ContestCard = ({ contest }) => {
     return `${dd}${hh}h ${mm}m ${ss}s`;
   };
 
-  const timeLeft = contest.startTime - Math.floor(Date.now() / 1000);
+  // const timeLeft = contest.startTime - Math.floor(Date.now() / 1000);
   const formattedDate = new Date(contest.startTime * 1000).toLocaleString('en-IN', {
     timeZone: 'Asia/Kolkata',
     weekday: 'short',
@@ -32,7 +32,16 @@ const ContestCard = ({ contest }) => {
     <div className="contest-card">
       <div className="contest-tags">
         <span className="tagu platform-tagu">{contest.platform}</span>
-        <span className="tagu upcoming-tagu">{timeLeft < 0 ? <p>Past</p> : <p>Upcoming</p> }</span>
+        <span className="tagu upcoming-tagu">
+          {(() => {
+            const currentTime = Math.floor(Date.now() / 1000);
+            const endTime = contest.startTime + contest.duration;
+            
+            if (currentTime < contest.startTime) return "Upcoming";
+            if (currentTime >= contest.startTime && currentTime < endTime) return "Ongoing";
+            return "Past";
+          })()}
+        </span>
         <span className="tagu title-tagu">{contest.platform == "LeetCode" ? contest.title.split(" ")[0] : undefined}</span>
       </div>
 
@@ -46,8 +55,33 @@ const ContestCard = ({ contest }) => {
       </div>
 
       <div className="countdown-box">
-        Starts in<br />
-        <span className="countdown-time">{timeLeft > 0 ? formatTime(timeLeft) : ""}</span>
+        {(() => {
+            const currentTime = Math.floor(Date.now() / 1000);
+            const endTime = contest.startTime + contest.duration;
+            
+            if (currentTime < contest.startTime) {
+              return (
+                <>
+                  Starts in<br />
+                  <span className="countdown-time">{formatTime(contest.startTime - currentTime)}</span>
+                </>
+              );
+            } else if (currentTime >= contest.startTime && currentTime < endTime) {
+              return (
+                <>
+                  Ends in<br />
+                  <span className="countdown-time">{formatTime(endTime - currentTime)}</span>
+                </>
+              );
+            } else {
+              return (
+                <>
+                  Contest ended<br />
+                  <span className="countdown-time"></span>
+                </>
+              );
+            }
+          })()}
       </div>
 
       <div className="contest-info">

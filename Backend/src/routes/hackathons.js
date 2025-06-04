@@ -6,6 +6,8 @@ const getDevpostHackathon = require('../hackathonPlatform/devpost');
 router.get('/', async (req, res) => {
   try {
     const devpost = await getDevpostHackathon();
+
+    console.log('Return hackathons ', devpost);
     res.json([...devpost]); 
     
   } catch (error) {

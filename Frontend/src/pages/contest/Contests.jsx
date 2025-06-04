@@ -19,15 +19,18 @@ const Contests = () => {
 
   const { ref, inView } = useInView();
 
-  const loadContests = async () => {
-    if (loading || !hasMore) return;
+  const loadContests = async (pageNum = page , resetContests = false , status= "All" , platforms = ['LeetCode', 'Codeforces', 'CodeChef']) => {
+    if (loading || (!hasMore && !resetContests)) return;
+
     setLoading(true);
     try {
-      const data = await fetchContests(page, LIMIT);
-      console.log("2:", data);
-      setContests((prev) => [...prev, ...data.contests]);
+      const data = await fetchContests(pageNum, LIMIT, status, platforms);
+      if(resetContests){
+        setContests(data.contests);
+      }else{
+        setContests((prev) => [...prev, ...data.contests]);
+      }
       setHasMore(data.hasMore);
-      setPage((prev) => prev + 1);
     } catch (err) {
       console.error(err);
     } finally {
@@ -36,18 +39,31 @@ const Contests = () => {
   };
 
   useEffect(() => {
-    loadContests();
+    console.log("Initail load");
+    loadContests(1,true,filters.selectedStatus,filters.selectedPlatforms);
   }, []);
 
   useEffect(() => {
-    if (inView) {
-      loadContests();
+    if(inView && !loading && hasMore) {
+      console.log("Loading more contests, page:", page + 1);
+      const nextPage = page + 1;
+      setPage(nextPage);
+      loadContests(nextPage, false , filters.selectedStatus , filters.selectedPlatforms);
     }
   }, [inView]);
 
+  // Handle filter changes
+  useEffect(() => {
+    console.log("Filters changed, resetting data");
+    setPage(1);
+    setHasMore(true);
+    loadContests(1, true,filters.selectedStatus,filters.selectedPlatforms);
+  }, [filters.selectedStatus]);
+  
+
   const getFilteredContests = () => {
     let filtered = [...contests];
-    const currentTime = Math.floor(Date.now() / 1000);
+    const currentTime = Math.floor(Date.now() / 1000);//gives in seconds
 
     if (filters.selectedPlatforms.length > 0) {
       filtered = filtered.filter((c) => filters.selectedPlatforms.includes(c.platform));
@@ -73,16 +89,24 @@ const Contests = () => {
       <h1 className="contest-list-title">{filters.selectedStatus} Contests</h1>
       <div className="contest-list-container">
         <div className="contest-sidebar">
-          <FilterContest contests={contests} filters={filters} setFilters={setFilters} />
+          <FilterContest filters={filters} setFilters={setFilters} page={page} setPage={setPage} />
         </div>
         <div className='contest-wrapper'>
+
           <div className="contest-grid">
             {filteredContests.map((contest, index) => (
-              <ContestCard key={index} contest={contest} />
+              <ContestCard key={`${contest.id || index}-${page}`} contest={contest} />
             ))}
           </div>
+
+          {filteredContests.length === 0 && !loading && (
+            <div className="no-contests">
+              <p>No contests found for the selected filters.</p>
+            </div>
+          )}
+
           <div ref={ref} style={{ height: '30px', margin: '20px 0' }}>
-            {loading && <p>Loading...</p>}
+            {loading && <p>Please wait Contests is Loading...</p>}
           </div>
         </div>
       </div>

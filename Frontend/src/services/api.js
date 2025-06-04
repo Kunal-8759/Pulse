@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-export const fetchContests = async(page,limit) => {
-  const res = await axios.get(`http://localhost:5000/api/contests?page=${page}&limit=${limit}`);
+export const fetchContests = async(page,limit,status,platforms) => {
+  const res = await axios.get(`http://localhost:5000/api/contests?page=${page}&limit=${limit}&status=${status}&platforms=${platforms}`);
   return res.data;
 };
 

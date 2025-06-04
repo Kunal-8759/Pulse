@@ -38,12 +38,12 @@ export function NightParticles() {
     }
 
     function createParticle(): Particle {
-      const x = Math.random() * canvas.width;
-      const y = canvas.height + Math.random() * 20;
+      const x = Math.random() * canvas!.width;
+      const y = canvas!.height + Math.random() * 20;
       const size = Math.random() * 2 + 0.5;
-      const speedY = Math.random() * 0.7 + 0.1;
-      const opacity = Math.random() * 0.6 + 0.2;
-      const maxLife = Math.random() * 500 + 300;
+      const speedY = Math.random() * 0.5 + 0.1;
+      const opacity = Math.random() * 0.6 + 0.3;
+      const maxLife = Math.random() * 500 + 500;
 
       const particle = { x, y, size, speedY, opacity, life: 0, maxLife };
       particles.push(particle);
