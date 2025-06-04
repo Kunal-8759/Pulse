@@ -1,6 +1,9 @@
 import axios from 'axios';
 
-const Backend_URL = 'https://pulse-l0vz.onrender.com';
+
+// eslint-disable-next-line no-undef
+const Backend_URL = import.meta.env.VITE_Backend_URL ;
+// const Backend_URL = `http://localhost:5000`;
 
 export const fetchContests = async(page,limit,status,platforms) => {
   const res = await axios.get(`${Backend_URL}/api/contests?page=${page}&limit=${limit}&status=${status}&platforms=${platforms}`);
@@ -12,7 +15,7 @@ export const fetchHackathons = async()=>{
 }
 
 export const getGitHubHeatmap = async(username) =>{
-  const data = await axios.get(`${Backend_URL}api/heatmap/github/${username}`);
+  const data = await axios.get(`${Backend_URL}/api/heatmap/github/${username}`);
   return data;
 }
 

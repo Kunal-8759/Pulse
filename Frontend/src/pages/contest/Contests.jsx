@@ -3,7 +3,7 @@ import { fetchContests } from '../../services/api';
 import ContestCard from '../../components/contests/ContestCard';
 import FilterContest from '../../components/contests/FilterContest';
 import { useInView } from 'react-intersection-observer';
-import './ContestList.css'; 
+import './contestList.css'; 
 
 const LIMIT = 9;
 
