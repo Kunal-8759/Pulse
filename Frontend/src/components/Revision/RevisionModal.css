@@ -1,48 +1,3 @@
-:root {
-  --background: hsl(222, 69%, 8%);
-  --foreground: hsl(210 40% 98%);
-  --card: hsl(222.2 84% 4.9%);
-  --card-foreground: hsl(210 40% 98%);
-  --popover: hsl(222.2 84% 4.9%);
-  --popover-foreground: hsl(210 40% 98%);
-  --primary: hsl(210 100% 52%);
-  --primary-foreground: hsl(222.2 47.4% 11.2%);
-  --secondary: hsl(217.2 32.6% 17.5%);
-  --secondary-foreground: hsl(210 40% 98%);
-  --muted: hsl(217.2 32.6% 17.5%);
-  --muted-foreground: hsl(215 20.2% 65.1%);
-  --accent: hsl(217.2 32.6% 17.5%);
-  --accent-foreground: hsl(210 40% 98%);
-  --destructive: hsl(0 62.8% 30.6%);
-  --destructive-foreground: hsl(210 40% 98%);
-  --success: hsl(142 76% 36%);
-  --success-foreground: hsl(210 40% 98%);
-  --border: hsl(217.2 32.6% 17.5%);
-  --input: hsl(217.2 32.6% 17.5%);
-  --ring: hsl(212.7 26.8% 83.9%);
-  --shadow-color: #0000004d;
-  --hover: #1e293b;
-  --progress: #e9990f;
-
-  --border-radius: 0.75rem;
-  --text-sm: 0.75rem;
-  --text-md: 0.875rem;
-  --text-base: 1rem;
-  --text-lg: 1.5rem;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", sans-serif;
-  background-color: var(--background);
-  color: var(--foreground);
-}
-
 .modal-overlay-rev {
   position: fixed;
   top: 0;
@@ -62,11 +17,12 @@ body {
   border-radius: var(--border-radius);
   box-shadow: 0 25px 50px -12px var(--shadow-color);
   width: 100%;
-  max-width: 650px;
-  height: 600px;
+  max-width: 1024px;
+  height: 680px;
   position: relative;
   display: flex;
   flex-direction: column;
+  border:1.5px solid var(--border);
 }
 
 .modal-content-rev {
@@ -109,16 +65,18 @@ body {
 
 .step-image-container {
   flex-shrink: 0;
-  height: 180px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .step-image {
-  width: 180px;
-  height: 180px;
+  width: 18rem;
+  height: 18rem;
   object-fit: contain;
+  border-radius:50%;
+  border : 1.5px solid var(--border);
+
 }
 
 .step-text-content {
@@ -132,15 +90,15 @@ body {
 }
 
 .step-title {
-  font-size: 1.75rem;
+  font-size: var(--text-lg);
   font-weight: 700;
-  color: var(--card-foreground);
+  color: var(--foreground);
   margin-bottom: 12px;
   line-height: 1.2;
 }
 
 .step-description {
-  font-size: var(--text-md);
+  font-size: var(--text-base);
   color: var(--muted-foreground);
   line-height: 1.5;
   max-width: 480px;
@@ -151,7 +109,7 @@ body {
   list-style: none;
   text-align: left;
   color: var(--muted-foreground);
-  font-size: var(--text-md);
+  font-size: var(--text-base);
   line-height: 1.5;
   max-width: 480px;
   margin: 0 auto;

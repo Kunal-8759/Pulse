@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { fetchContests } from '../../services/api';
 import ContestCard from '../../components/contests/ContestCard';
 import FilterContest from '../../components/contests/FilterContest';
@@ -18,6 +18,7 @@ const Contests = () => {
   });
 
   const { ref, inView } = useInView();
+  const isMounted = useRef(false);
 
   const loadContests = async (pageNum = page , resetContests = false , status= "All" , platforms = ['LeetCode', 'Codeforces', 'CodeChef']) => {
     if (loading || (!hasMore && !resetContests)) return;
@@ -39,7 +40,7 @@ const Contests = () => {
   };
 
   useEffect(() => {
-    console.log("Initail load");
+    console.log("Initial load");
     loadContests(1,true,filters.selectedStatus,filters.selectedPlatforms);
   }, []);
 
@@ -54,6 +55,10 @@ const Contests = () => {
 
   // Handle filter changes
   useEffect(() => {
+    if(!isMounted.current){
+      isMounted.current=true;
+      return;
+    }
     console.log("Filters changed, resetting data");
     setPage(1);
     setHasMore(true);

@@ -11,7 +11,7 @@
 }
 
 .card:hover {
-  transform: translateY(-4px);
+  transform: translate(-2px,-4px);
   box-shadow: 0 8px 16px  var(--shadow-color);
 }
 
@@ -61,22 +61,23 @@
 }
 
 .info p {
-  margin: 5px 0;
-  font-size: var(--text-sm);
+  margin: 7px 0;
+  font-size: 0.8rem;
   /* color: var(--muted-foreground); */
 }
 
 .tags-container {
-  margin-top: 10px;
+  margin: 10px 0;
+  display: flex;
+  gap:5px;
+
 }
 
 .tag-item {
-  display: inline-block;
-  background-color: var(--muted);
   padding: 5px 10px;
   border-radius: var(--border-radius);
-  font-size: 0.6rem;
-  margin: 0.5rem 0.1rem;
+  font-size: var(--text-sm);
+  border:1.5px solid var(--border);
 }
 
 .view-button {
@@ -85,9 +86,16 @@
   text-align: center;
   width: 100%;
   background: var(--primary);
-  color: var(--foreground);
+  color: var(--secondary-foreground);
   padding: 10px 0;
   border-radius: var(--border-radius);
   text-decoration: none;
   font-weight: 500;
+}
+
+.hackathon-1{
+  color:var(--muted-foreground);
+  position: relative;
+  top:2px;
+  margin-right: 5px;
 }

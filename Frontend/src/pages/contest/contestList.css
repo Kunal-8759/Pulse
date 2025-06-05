@@ -37,7 +37,7 @@
   
   .contest-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
     margin: 0 auto;
     /* width: 95%; */
     gap: 1.5rem;

@@ -12,7 +12,7 @@ const RevisionUnderPreparation = () => {
   return (
     <div
       style={{
-        minHeight: "100vh",
+        height: "90vh",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -41,7 +41,7 @@ const RevisionUnderPreparation = () => {
         <button
           className="btn btn-primary"
           onClick={openModal}
-          style={{ fontSize: "var(--text-base)", padding: "16px 32px" }}
+          style={{ fontSize: "var(--text-base)", padding: "16px 32px" , color:"var(--secondary-foreground)" }}
         >
           Learn What's Coming Soon
         </button>
