@@ -1,6 +1,6 @@
 .integration-container {
-    max-width: 1024px;
-    width:100%;
+    /* max-width: 1024px; */
+    width:85%;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -13,8 +13,16 @@
     font-size: var(--text-lg);
     font-weight: 700;
   }
+
+  .data-storage{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+  }
   
   .integration-card {
+    flex:1fr;
+    width:100%;
     background-color: var(--card);
     border: 1.5px solid var(--border);
     border-radius: var(--border-radius);
@@ -72,7 +80,7 @@
   
   .input-field:focus {
     outline: none;
-    border-color: var(--primary);
+    border-color: var(--foreground);
     box-shadow: 0 0 0 2px rgba(10, 132, 255, 0.25);
   }
   
@@ -108,8 +116,25 @@
     background-color: var(--secondary);
   }
 
+  @media (max-width:1180px){
+    .integration-container{
+      width:90%;
+    }
+  }
+  @media (max-width:910px){
+     .data-storage{
+      flex-direction: column;
+     }
+     .integration-container{
+      width:93%;
+     }
+  }
+
   @media (max-width:480px){
     .save-button{
       width:100%;
+    }
+    .integration-container{
+      width:98%;
     }
   }
