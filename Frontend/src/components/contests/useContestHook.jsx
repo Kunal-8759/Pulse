@@ -5,7 +5,7 @@ const LIMIT = 9;
 
 export const useContests = (filters) => {
   return useInfiniteQuery({
-    queryKey: ['contests', filters.selectedStatus, filters.selectedPlatforms],
+    queryKey: ['contests', filters.selectedStatus],
     queryFn: ({ pageParam = 1 }) => 
       fetchContests(pageParam, LIMIT, filters.selectedStatus, filters.selectedPlatforms),
     getNextPageParam: (lastPage, allPages) => {
