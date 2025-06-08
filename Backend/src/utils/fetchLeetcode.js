@@ -1,10 +1,10 @@
 const axios = require("axios");
 
-const fetchLeetCodeRecentSubmissions = async ( req,res ) => {
+const fetchLeetCodeRecentSubmissions = async (req, res) => {
   const url = "https://leetcode.com/graphql";
 
-  const username = req.params.username // Replace with the desired username
-  const limit=10;
+  const username = req.params.username; // Replace with the desired username
+  const limit = 10;
 
   // Query to check if user exists
   const checkUserQuery = `
@@ -14,7 +14,6 @@ const fetchLeetCodeRecentSubmissions = async ( req,res ) => {
       }
     }
   `;
-
 
   const submissionsQuery = `
     query getUserProfile($username: String!, $limit: Int!) {
@@ -28,10 +27,8 @@ const fetchLeetCodeRecentSubmissions = async ( req,res ) => {
     }
   `;
 
-
   try {
-
-     // Step 1: Check if user exists
+    // Step 1: Check if user exists
     const userCheckResponse = await axios.post(url, {
       query: checkUserQuery,
       variables: { username },
@@ -40,7 +37,7 @@ const fetchLeetCodeRecentSubmissions = async ( req,res ) => {
     const userExists = userCheckResponse.data.data.matchedUser;
 
     if (!userExists) {
-      return res.json({ error: "User not found on LeetCode." , data : []});
+      return res.json({ error: "User not found on LeetCode.", data: [] });
     }
 
     // Step 2: Fetch recent submissions
@@ -60,14 +57,28 @@ const fetchLeetCodeRecentSubmissions = async ( req,res ) => {
         hour: "2-digit",
         minute: "2-digit",
         hour12: true,
+        timeZone: "Asia/Kolkata",
       });
     };
 
     const timeAgo = (ts) => {
       const now = Date.now();
-      const diffMs = now - parseInt(ts) * 1000;
+      const submissionTime = parseInt(ts) * 1000;
+      const diffMs = Math.abs(now - submissionTime); // Use Math.abs to handle any timestamp issues
+
+      const diffMinutes = Math.floor(diffMs / (1000 * 60));
+      const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
       const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-      return diffDays === 0 ? "Today" : `${diffDays} days ago`;
+
+      if (diffMinutes < 1) {
+        return "Just now";
+      } else if (diffMinutes < 60) {
+        return `${diffMinutes} minute${diffMinutes > 1 ? "s" : ""} ago`;
+      } else if (diffHours < 24) {
+        return `${diffHours} hour${diffHours > 1 ? "s" : ""} ago`;
+      } else {
+        return `${diffDays} day${diffDays > 1 ? "s" : ""} ago`;
+      }
     };
 
     const submission = submissions.map((s) => ({
@@ -79,8 +90,7 @@ const fetchLeetCodeRecentSubmissions = async ( req,res ) => {
       ago: timeAgo(s.timestamp),
     }));
 
-    return res.json({ data:submission , error : "" });
-
+    return res.json({ data: submission, error: "" });
   } catch (err) {
     console.error("Error fetching LeetCode submissions:", err);
   }

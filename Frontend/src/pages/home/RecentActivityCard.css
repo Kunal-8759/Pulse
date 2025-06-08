@@ -13,6 +13,7 @@
     padding:1.5rem;
     border: 1.5px solid var(--border);
     flex:1;
+    height:560px;
   }
   
   /* Card Header */
@@ -40,6 +41,17 @@
     max-height: 420px;
     overflow-y: auto;
     padding: 8px 0;
+  }
+
+  .recent-activities.loading{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--muted-foreground);
+    padding:16px;
+    background-color: var(--card);
+    border-radius: var(--border-radius);
+    border: 1.5px solid var(--border);
   }
   
   /* Scrollbar styling */

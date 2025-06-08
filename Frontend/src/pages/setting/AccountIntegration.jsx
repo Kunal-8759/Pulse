@@ -18,13 +18,15 @@ const AccountIntegration = () => {
   }, [])
 
   const saveGithub = () => {
-    localStorage.setItem("githubUsername", githubUsername)
-    alert("GitHub username saved!")
+    const trimmedValue = githubUsername.trim()
+    localStorage.setItem("githubUsername", trimmedValue || "")
+    alert(trimmedValue ? "GitHub username saved!" : "GitHub username cleared!")
   }
 
   const saveLeetcode = () => {
-    localStorage.setItem("leetcodeUsername", leetcodeUsername)
-    alert("LeetCode username saved!")
+    const trimmedValue = leetcodeUsername.trim()
+    localStorage.setItem("leetcodeUsername", trimmedValue || "")
+    alert(trimmedValue ? "LeetCode username saved!" : "LeetCode username cleared!")
   }
 
   return (

@@ -4,13 +4,12 @@ import "react-calendar-heatmap/dist/styles.css";
 import { format, fromUnixTime } from "date-fns";
 import "./HeatMap.css";
 
-const Heatmap = ({ data, isUnix , platform , streaks ,error }) => {
+const Heatmap = ({ data, isUnix , platform , streaks ,error ,isLoading }) => {
   const values = Object.keys(data).map((key) => ({
     date: isUnix ? format(fromUnixTime(Number(key)), "yyyy-MM-dd") : key,
     count: data[key],
   }));
 
-  console.log("streaks", streaks);
   return (
     <div className="heatmap-card">
       <h2 className="heatmap-title">{ platform=="leetcode" ? "LeetCode Activity" : "GitHub Contributions"}</h2>

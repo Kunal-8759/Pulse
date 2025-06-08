@@ -1,26 +1,36 @@
 const axios = require("axios");
 const { GITHUB_TOKEN } = require("../config/config"); // or hardcode if testing
 
-const fetchGitHubEventActivity = async (req,res) => {
+const fetchGitHubEventActivity = async (req, res) => {
   const token = GITHUB_TOKEN;
-  const username = req.params.username; 
+  const username = req.params.username;
   console.log("Fetching GitHub event activity for:", username);
 
   try {
-
-
-    await axios.get(`https://api.github.com/users/${username}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "User-Agent": "request",
-      },
-    });
-    const response = await axios.get(`https://api.github.com/users/${username}/events/public`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "User-Agent": "request",
-      },
-    });
+    const userResponse = await axios.get(
+      `https://api.github.com/users/${username}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "User-Agent": "request",
+        },
+      }
+    );
+    if (!userResponse.data) {
+      return res.json({ events: [], error: "User not found on GitHub" });
+    }
+    const response = await axios.get(
+      `https://api.github.com/users/${username}/events/public`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "User-Agent": "request",
+        },
+      }
+    );
+    if (!response.data || response.data.length === 0) {
+      return res.json({ events: [] });
+    }
 
     const events = response.data;
     const formattedEvents = [];
@@ -37,6 +47,7 @@ const fetchGitHubEventActivity = async (req,res) => {
           hour: "2-digit",
           minute: "2-digit",
           hour12: true,
+          timeZone: "Asia/Kolkata",
         });
       };
 
@@ -44,18 +55,30 @@ const fetchGitHubEventActivity = async (req,res) => {
         const now = new Date();
         const past = new Date(dateStr);
         const diffMs = now - past;
+
+        const diffMinutes = Math.floor(diffMs / (1000 * 60));
+        const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
         const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-        if (diffDays === 0) return "Today";
-        if (diffDays === 1) return "1 day ago";
-        return `${diffDays} days ago`;
+
+        if (diffMinutes < 1) {
+          return "Just now";
+        } else if (diffMinutes < 60) {
+          return `${diffMinutes} minute${diffMinutes > 1 ? "s" : ""} ago`;
+        } else if (diffHours < 24) {
+          return `${diffHours} hour${diffHours > 1 ? "s" : ""} ago`;
+        } else if (diffDays === 1) {
+          return "1 day ago";
+        } else {
+          return `${diffDays} days ago`;
+        }
       };
 
       const baseEvent = {
         repo: repo.name.split("/")[1], // Trim username from "username/repo"
         date: formatDate(created_at),
         ago: getTimeAgo(created_at),
-        platform:"GitHub",
-        link:`https://github.com/${repo.name}`,
+        platform: "GitHub",
+        link: `https://github.com/${repo.name}`,
       };
 
       if (type === "PushEvent") {
@@ -82,13 +105,11 @@ const fetchGitHubEventActivity = async (req,res) => {
       }
     });
 
-    return res.json(
-        { events: formattedEvents}
-    );
+    return res.json({ events: formattedEvents });
   } catch (err) {
     if (err.response && err.response.status === 404) {
       console.warn("GitHub user not found:", username);
-      return res.json({ events: []});
+      return res.json({ events: [] });
     }
 
     console.error("Error fetching GitHub events:", err);

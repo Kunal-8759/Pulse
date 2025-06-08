@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { getGitHubHeatmap, getLeetCodeData } from "../../services/api";
 import Heatmap from "../../components/Home/HeatMap";
-import '../../components/Home/HeatMap.css';
+import "../../components/Home/HeatMap.css";
 
 function calculateStreaks(submissionCalendarString) {
   const submissionCalendar = JSON.parse(submissionCalendarString);
@@ -21,7 +22,8 @@ function calculateStreaks(submissionCalendarString) {
     }
 
     if (submissionCalendar[key] > 0) {
-      const dayStart = Math.floor(timestamp / ONE_DAY_SECONDS) * ONE_DAY_SECONDS;
+      const dayStart =
+        Math.floor(timestamp / ONE_DAY_SECONDS) * ONE_DAY_SECONDS;
       daysSet.add(dayStart);
     }
   }
@@ -45,7 +47,11 @@ function calculateStreaks(submissionCalendarString) {
 
   // CURRENT STREAK
   const now = new Date();
-  const todayUTC = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate());
+  const todayUTC = Date.UTC(
+    now.getUTCFullYear(),
+    now.getUTCMonth(),
+    now.getUTCDate()
+  );
   let checkDay = Math.floor(todayUTC / 1000);
   let currentStreak = 0;
 
@@ -65,82 +71,122 @@ function calculateStreaks(submissionCalendarString) {
   };
 }
 
-
-
-
 function HeatMaps() {
-  const [githubData, setGitHubData] = useState(null);
-  const [leetcodeData, setLeetCodeData] = useState(null);
-  const [leetCodeStreaks, setLeetCodeStreaks] = useState({ currentStreak: 0, maxStreak: 0 });
-  const [githubStreaks, setGitHubStreaks] = useState({ currentStreak: 0, maxStreak: 0 });
-  const [gitError, setGitError] = useState(null);
-  const [leetError, setLeetError] = useState(null);
+  const [leetCodeStreaks, setLeetCodeStreaks] = useState({
+    currentStreak: 0,
+    maxStreak: 0,
+  });
+  const [githubStreaks, setGitHubStreaks] = useState({
+    currentStreak: 0,
+    maxStreak: 0,
+  });
 
-  useEffect(() => {
-    const githubUsername = localStorage.getItem("githubUsername");
-    const leetcodeUsername = localStorage.getItem("leetcodeUsername");
+  const githubUsername = localStorage.getItem("githubUsername");
+  const leetcodeUsername = localStorage.getItem("leetcodeUsername");
 
-    console.log("GitHub Username:", githubUsername);
-    console.log("LeetCode Username:", leetcodeUsername);
+  console.log("GitHub Username:", githubUsername);
+  console.log("leetcode username : ", leetcodeUsername);
 
-    const fetchHeatmaps = async () => {
-      try {
-        if (githubUsername) {
-          const githubRes = await getGitHubHeatmap(githubUsername);          
-          setGitHubData(githubRes.data.data);
-          setGitError(githubRes.data.error);
-          const streaks = calculateStreaks(JSON.stringify(githubRes.data.data));
-          setGitHubStreaks(streaks);
-        }else{
-          setGitHubData({});
-          setGitHubStreaks({ currentStreak: 0, maxStreak: 0 });
-          setGitError("Please update your GitHub profile in Settings.");
-        }
-
-        if (leetcodeUsername) {
-          const leetcodeRes =  await getLeetCodeData(leetcodeUsername);
-          setLeetCodeData(leetcodeRes.data.submissionCalendar);
-          setLeetError(leetcodeRes.data.error);
-          const streaks = calculateStreaks(JSON.stringify(leetcodeRes.data.submissionCalendar));
-          setLeetCodeStreaks(streaks);
-        }else{
-          setLeetCodeData({});
-          setLeetCodeStreaks({ currentStreak: 0, maxStreak: 0 });
-          setLeetError("Please update your LeetCode profile in Settings.");
-        }
-      } catch (err) {
-        console.log(err);
+  // GitHub data query
+  const {
+    data: githubResponse,
+    error: githubError,
+    isLoading: githubLoading,
+  } = useQuery({
+    queryKey: ["github-heatmap", githubUsername],
+    queryFn: async () => {
+      if (!githubUsername) {
+        return {
+          data: {},
+          error: "Please update your GitHub profile in Settings.",
+        };
       }
-    };
+      const githubRes = await getGitHubHeatmap(githubUsername);
+      return {
+        data: githubRes.data.data,
+        error: githubRes.data.error,
+      };
+    },
+    staleTime: 5 * 60 * 1000, // 5 minutes
+    cacheTime: 30 * 60 * 1000, // 30 minutes
+    refetchOnWindowFocus: false,
+  });
 
-    fetchHeatmaps();
-  }, []);
+  // LeetCode data query
+  const {
+    data: leetcodeResponse,
+    error: leetcodeError,
+    isLoading: leetcodeLoading,
+  } = useQuery({
+    queryKey: ["leetcode-heatmap", leetcodeUsername],
+    queryFn: async () => {
+      if (!leetcodeUsername) {
+        return {
+          data: {},
+          error: "Please update your LeetCode profile in Settings.",
+        };
+      }
+      const leetcodeRes = await getLeetCodeData(leetcodeUsername);
+      return {
+        data: leetcodeRes.data.submissionCalendar,
+        error: leetcodeRes.data.error,
+      };
+    },
+    staleTime: leetcodeUsername ? 5 * 60 * 1000 : 0, // 5 minutes
+    cacheTime: leetcodeUsername ? 30 * 60 * 1000 : 0, // 30 minutes
+    refetchOnWindowFocus: false,
+  });
+
+  // Calculate GitHub streaks when data changes
+  useEffect(() => {
+    if (githubResponse?.data) {
+      const streaks = calculateStreaks(JSON.stringify(githubResponse.data));
+      setGitHubStreaks(streaks);
+    } else {
+      setGitHubStreaks({ currentStreak: 0, maxStreak: 0 });
+    }
+  }, [githubResponse]);
+
+  // Calculate LeetCode streaks when data changes
+  useEffect(() => {
+    if (leetcodeResponse?.data) {
+      const streaks = calculateStreaks(JSON.stringify(leetcodeResponse.data));
+      setLeetCodeStreaks(streaks);
+    } else {
+      setLeetCodeStreaks({ currentStreak: 0, maxStreak: 0 });
+    }
+  }, [leetcodeResponse]);
+
+  // Prepare data and errors for the Heatmap components
+  const gitData = githubResponse?.data || {};
+  const leetData = leetcodeResponse?.data || {};
+
+  const gitError = githubResponse?.error || githubError;
+  const leetError = leetcodeResponse?.error || leetcodeError;
 
   return (
     <>
       <div className="home">
-
-      <div className="heatmap-container">
-        <Heatmap
-          data={leetcodeData || {}}
-          isUnix={true}
-          platform="leetcode"
-          streaks={leetCodeStreaks}
-          error={leetError}
-        />
-        <Heatmap
-          data={githubData || {}}
-          isUnix={false}
-          platform="github"
-          streaks={githubStreaks}
-          error={gitError}
-        />
+        <div className="heatmap-container">
+          <Heatmap
+            data={leetData}
+            isUnix={true}
+            platform="leetcode"
+            streaks={leetCodeStreaks}
+            error={leetError}
+            isLoading={githubLoading}
+          />
+          <Heatmap
+            data={gitData}
+            isUnix={false}
+            platform="github"
+            streaks={githubStreaks}
+            error={gitError}
+            isLoading={leetcodeLoading}
+          />
+        </div>
       </div>
-
-      </div>
-    
     </>
   );
 }
-
 export default HeatMaps;

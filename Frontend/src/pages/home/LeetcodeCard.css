@@ -15,7 +15,6 @@ flex:1;
 display: flex;
 justify-content: center;
 align-items: center;
-/* height: 200px; */
 color: var(--muted-foreground);
 }
 
