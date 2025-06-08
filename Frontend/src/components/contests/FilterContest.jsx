@@ -1,7 +1,7 @@
 "use client"
 import "./FilterContest.css"
 
-const FilterContest = ({ filters, setFilters , page ,setPage }) => {
+const FilterContest = ({ filters, setFilters}) => {
   // Get unique platforms from contests
   const platforms = ['LeetCode', 'Codeforces', 'CodeChef'];
   const statuses = ["All", "Upcoming", "Ongoing", "Past"];

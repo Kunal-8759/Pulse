@@ -1,73 +1,46 @@
-import { useEffect, useRef, useState } from 'react';
-import { fetchContests } from '../../services/api';
+import { useEffect, useMemo, useState } from 'react';
 import ContestCard from '../../components/contests/ContestCard';
 import FilterContest from '../../components/contests/FilterContest';
 import { useInView } from 'react-intersection-observer';
-import './contestList.css'; 
+import './contestList.css';
+import { useContests } from '../../components/contests/useContestHook';
 
-const LIMIT = 9;
 
 const Contests = () => {
-  const [contests, setContests] = useState([]);
-  const [page, setPage] = useState(1);
-  const [hasMore, setHasMore] = useState(true);
-  const [loading, setLoading] = useState(false);
   const [filters, setFilters] = useState({
     selectedPlatforms: ['LeetCode', 'Codeforces', 'CodeChef'],
     selectedStatus: "All",
   });
 
   const { ref, inView } = useInView();
-  const isMounted = useRef(false);
 
-  const loadContests = async (pageNum = page , resetContests = false , status= "All" , platforms = ['LeetCode', 'Codeforces', 'CodeChef']) => {
-    if (loading || (!hasMore && !resetContests)) return;
+  // Use React Query hook
+  const {
+    data,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    isLoading,
+    isError,
+    error
+  } = useContests(filters);
 
-    setLoading(true);
-    try {
-      const data = await fetchContests(pageNum, LIMIT, status, platforms);
-      if(resetContests){
-        setContests(data.contests);
-      }else{
-        setContests((prev) => [...prev, ...data.contests]);
-      }
-      setHasMore(data.hasMore);
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
-  };
+  // Flatten all pages into a single array
+  const allContests = useMemo(() => {
+    return data?.pages.flatMap(page => page.contests) || [];
+  }, [data]);
 
+  // Handle infinite scrolling-->by using this we are able to fetch the 18 contest at start which is okay
   useEffect(() => {
-    console.log("Initial load");
-    loadContests(1,true,filters.selectedStatus,filters.selectedPlatforms);
-  }, []);
-
-  useEffect(() => {
-    if(inView && !loading && hasMore) {
-      console.log("Loading more contests, page:", page + 1);
-      const nextPage = page + 1;
-      setPage(nextPage);
-      loadContests(nextPage, false , filters.selectedStatus , filters.selectedPlatforms);
+    if (inView && hasNextPage && !isFetchingNextPage) {
+      console.log("Loading more contests...");
+      fetchNextPage();
     }
-  }, [inView]);
+  }, [inView, fetchNextPage, hasNextPage, isFetchingNextPage]);
 
-  // Handle filter changes
-  useEffect(() => {
-    if(!isMounted.current){
-      isMounted.current=true;
-      return;
-    }
-    console.log("Filters changed, resetting data");
-    setPage(1);
-    setHasMore(true);
-    loadContests(1, true,filters.selectedStatus,filters.selectedPlatforms);
-  }, [filters.selectedStatus]);
-  
 
   const getFilteredContests = () => {
-    let filtered = [...contests];
+    let filtered = [...allContests];
     const currentTime = Math.floor(Date.now() / 1000);//gives in seconds
 
     if (filters.selectedPlatforms.length > 0) {
@@ -94,24 +67,35 @@ const Contests = () => {
       <h1 className="contest-list-title">{filters.selectedStatus} Contests</h1>
       <div className="contest-list-container">
         <div className="contest-sidebar">
-          <FilterContest filters={filters} setFilters={setFilters} page={page} setPage={setPage} />
+          <FilterContest filters={filters} setFilters={setFilters} />
         </div>
         <div className='contest-wrapper'>
 
-          <div className="contest-grid">
-            {filteredContests.map((contest, index) => (
-              <ContestCard key={`${contest.id || index}-${page}`} contest={contest} />
-            ))}
-          </div>
+          {isError ? (
+          <div>{error.message}</div> )
+          :(
+            isLoading ? (
+              <div>Contests is Loading...</div>
+            ) : (
+              <div className="contest-grid">
+                {filteredContests.map((contest, index) => (
+                  <ContestCard key={`${contest.id || index}`} contest={contest} />
+                ))}
+              </div>
+            )
+          )
 
-          {filteredContests.length === 0 && !loading && (
+          }
+
+          
+          {filteredContests.length === 0 && !isLoading && (
             <div className="no-contests">
               <p>No contests found for the selected filters.</p>
             </div>
           )}
 
           <div ref={ref} style={{ height: '30px', margin: '20px 0' }}>
-            {loading && <p>Please wait Contests is Loading...</p>}
+            {isFetchingNextPage && <p>Loading more contests...</p>}
           </div>
         </div>
       </div>

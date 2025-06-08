@@ -91,6 +91,7 @@ router.get("/", async (req, res) => {
       // platforms: platforms,
     })
   } catch (error) {
+    throw new Error("Unable to Fetch the Contest , Please try again Later");
     console.error("Error fetching contests:", error.message)
     res.status(500).json({ message: "Failed to fetch contests" })
   }
