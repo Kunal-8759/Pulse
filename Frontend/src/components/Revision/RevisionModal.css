@@ -71,8 +71,8 @@
 }
 
 .step-image {
-  width: 18rem;
-  height: 18rem;
+  width: 270px;
+  height: 270px;
   object-fit: contain;
   border-radius:50%;
   border : 1.5px solid var(--border);

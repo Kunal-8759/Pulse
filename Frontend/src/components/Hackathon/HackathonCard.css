@@ -92,6 +92,9 @@
   text-decoration: none;
   font-weight: 500;
 }
+.view-button:hover{
+  background-color: var(--secondary);
+}
 
 .hackathon-1{
   color:var(--muted-foreground);

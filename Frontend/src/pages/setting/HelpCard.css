@@ -8,6 +8,11 @@
   border-radius: var(--border-radius);
   box-shadow: 0 4px 6px -1px var(--shadow-color);
   overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.help-card:hover{
+  transform: translate(-2px,-3px);
+  box-shadow: 0 8px 16px  var(--shadow-color);
 }
 
 .help-card-header {
@@ -243,19 +248,5 @@ input.help-form-input:-webkit-autofill {
 @media (max-width : 720px){
   .help-form{
     padding:0rem;
-  }
-}
-
-
-
-/* Reduced Motion Support */
-@media (prefers-reduced-motion: reduce) {
-  .loading-spinner {
-    animation: none;
-  }
-
-  * {
-    transition-duration: 0.01ms !important;
-    animation-duration: 0.01ms !important;
   }
 }

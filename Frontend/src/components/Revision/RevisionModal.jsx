@@ -14,7 +14,7 @@ const RevisionModal = ({ isOpen, onClose }) => {
   const steps = [
     {
       title: "Welcome to Revision Tracker",
-      description: "Let's find out how we can help you in less than a minute.",
+      description: "Let’s explore what’s coming soon in less than a minute!",
       image: welcomeImage,
       alt: "Welcome Image",
       type: "welcome",
