@@ -1,39 +1,57 @@
 import "./Navbar.css"
 import { HomeIcon, ListTodoIcon, TrophyIcon, CodeIcon, GearIcon, BookOpenIcon } from "./Icons"
-import { Link } from "react-router-dom"
+import { NavLink } from "react-router-dom"
 
 const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="navbar-container">
         <div className="logo">
-          <Link to="/">Pulse</Link>
+          <NavLink to="/">Pulse</NavLink>
         </div>
         <div className="nav-links">
-          <Link to="/" className="nav-link">
+          <NavLink 
+            to="/" 
+            className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+          >
             <HomeIcon />
             <span>Home</span>
-          </Link>
-          <Link to="/tasks" className="nav-link">
+          </NavLink>
+          <NavLink 
+            to="/tasks" 
+            className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+          >
             <ListTodoIcon />
             <span>Tasks</span>
-          </Link>
-          <Link to="/contests" className="nav-link">
+          </NavLink>
+          <NavLink 
+            to="/contests" 
+            className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+          >
             <TrophyIcon />
             <span>Contests</span>
-          </Link>
-          <Link to="/hackathons" className="nav-link">
+          </NavLink>
+          <NavLink 
+            to="/hackathons" 
+            className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+          >
             <CodeIcon />
             <span>Hackathons</span>
-          </Link>
-          <Link to="/revision" className="nav-link">
+          </NavLink>
+          <NavLink 
+            to="/revision" 
+            className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+          >
             <BookOpenIcon />
             <span>Revision</span>
-          </Link>
-          <Link to="/settings" className="nav-link">
+          </NavLink>
+          <NavLink 
+            to="/settings" 
+            className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+          >
             <GearIcon />
             <span>Settings</span>
-          </Link>
+          </NavLink>
         </div>
       </div>
     </nav>

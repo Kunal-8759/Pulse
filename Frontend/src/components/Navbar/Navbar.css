@@ -54,14 +54,22 @@
   font-weight: 500;
 }
 
-.nav-link:hover ,
-.nav-link.active{
+.nav-link:hover{
   background-color: var(--hover);
   transform: translateY(0.5px);
 }
 
 .nav-link svg {
   opacity: 0.7;
+}
+
+.nav-link.active {
+  background-color: var(--hover);
+  transform: translateY(0.5px);
+  color:var(--foreground);
+}
+.nav-link.active svg {
+  opacity: 1;
 }
 
 
