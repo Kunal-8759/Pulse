@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 
-// const Backend_URL = import.meta.env.VITE_Backend_URL ;
-const Backend_URL = `http://localhost:5000`;
+const Backend_URL = import.meta.env.VITE_Backend_URL ;
+// const Backend_URL = `http://localhost:5000`;
 
 export const fetchContests = async(page,limit,status,platforms) => {
   const res = await axios.get(`${Backend_URL}/api/contests?page=${page}&limit=${limit}&status=${status}&platforms=${platforms}`);
