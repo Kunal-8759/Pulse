@@ -13,7 +13,6 @@
     padding:1.5rem;
     border: 1.5px solid var(--border);
     flex:1;
-    height:565px;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
   .recent-activity-card:hover{
