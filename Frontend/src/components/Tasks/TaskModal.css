@@ -13,17 +13,43 @@
   animation: fadeIn 0.2s ease-out;
 }
 
-.modal-content {
+.task-modal-content {
   background-color: var(--card);
   border-radius: var(--border-radius);
-  width: 90%;
+  width: 100%;
   max-width: 400px;
-  max-height: 80vh;
+  max-height: 85vh;
   overflow-y: auto;
   box-shadow: 0 4px 6px var(--shadow-color);
   animation: slideIn 0.3s ease-out;
   border: 1.5px solid var(--border);
+  margin-top:40px;
 }
+
+/* Custom Scrollbar Styles */
+.task-modal-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.task-modal-content::-webkit-scrollbar-track {
+  background: var(--muted);
+}
+
+.task-modal-content::-webkit-scrollbar-thumb {
+  background: var(--muted-foreground);
+  border-radius: 4px;
+}
+
+.task-modal-content::-webkit-scrollbar-thumb:hover {
+  background: var(--foreground);
+}
+
+/* Firefox scrollbar */
+.task-modal-content {
+  scrollbar-width: thin;
+  scrollbar-color: var(--muted-foreground) var(--muted);
+}
+
 
 .modal-header {
   display: flex;
@@ -111,6 +137,18 @@ textarea {
 .date-time-container {
   display: flex;
   gap: 1rem;
+}
+
+/* Make date/time containers clickable */
+.date-input,
+.time-input {
+  cursor: pointer;
+  position: relative;
+}
+
+.date-input:hover,
+.time-input:hover {
+  opacity: 0.8;
 }
 
 .date-input,

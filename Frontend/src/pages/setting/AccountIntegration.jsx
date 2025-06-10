@@ -11,7 +11,9 @@ const AccountIntegration = () => {
 
   function saveGitHubSettings() {
     if (!githubUsername.trim()) {
-      toast.error("Please enter the GitHub username");
+      localStorage.setItem('githubUsername', '');
+      setGithubUsername('');
+      toast.success("GitHub username cleared");
       return;
     }
 
@@ -58,7 +60,9 @@ const AccountIntegration = () => {
 
   function saveLeetCodeSettings() {
     if (!leetcodeUsername.trim()) {
-      toast.error("Please enter a LeetCode username");
+      localStorage.setItem('leetcodeUsername', '');
+      setLeetcodeUsername('');
+      toast.success("LeetCode username cleared");
       return;
     }
 

@@ -63,6 +63,11 @@
 .info p {
   margin: 7px 0;
   font-size: 0.8rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 4px;
+
   /* color: var(--muted-foreground); */
 }
 
@@ -98,7 +103,5 @@
 
 .hackathon-1{
   color:var(--muted-foreground);
-  position: relative;
-  top:2px;
   margin-right: 5px;
 }

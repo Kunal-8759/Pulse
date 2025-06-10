@@ -4,6 +4,8 @@ import HackathonCard from "../../components/Hackathon/HackathonCard";
 import HackathonSort from "../../components/Hackathon/HackathonSort";
 import "./Hackathon.css"; // 
 import { useHackathons } from "../../components/Hackathon/useHacktathonsHook";
+import { Loader } from "../../components/Skelton/Loader";
+import toast, { Toaster } from "react-hot-toast";
 
 const Hackathon = () => {
   const [locationFilter, setLocationFilter] = useState("all");
@@ -46,6 +48,13 @@ const Hackathon = () => {
 
   return (
     <>
+
+      <Toaster
+        position="bottom-right"
+        toastOptions={{
+          duration: 3000,
+        }}
+      />
       <div className="hackathon-header">
         <h1 className="hackathon-title">Hackathons</h1>
         <p className="hackathon-description">
@@ -58,30 +67,32 @@ const Hackathon = () => {
         sortOption={sortOption}
         setSortOption={setSortOption}
       />
-      <div className="hackathon-grid">
+
 
       {isError ? (
-        <p>Error loading hackathons: {error?.message}</p>
+        toast.error(`Error while fetching the Hackathon`)
       ) : isLoading ? (
-        <p>Loading hackathons...</p>
+        <div className='flex flex-col items-center justify-center'>
+          <Loader text='Loading Contests' />
+        </div>
       ) : (
-        sortedHackathons.map((hackathon, index) => (
-          <HackathonCard
-            key={index}
-            thumbnail={hackathon.thumbnail}
-            title={hackathon.title}
-            organizer={hackathon.organizer}
-            submissionPeriod={hackathon.submissionPeriod}
-            location={hackathon.location}
-            prize={hackathon.prize}
-            participants={hackathon.participants}
-            portfolio={hackathon.portfolio}
-            url={hackathon.url}
-            platform={hackathon.platform}
-          />
-        ))
-      )}
-    </div >
+        <div className="hackathon-grid">
+          {sortedHackathons.map((hackathon, index) => (
+            <HackathonCard
+              key={index}
+              thumbnail={hackathon.thumbnail}
+              title={hackathon.title}
+              organizer={hackathon.organizer}
+              submissionPeriod={hackathon.submissionPeriod}
+              location={hackathon.location}
+              prize={hackathon.prize}
+              participants={hackathon.participants}
+              portfolio={hackathon.portfolio}
+              url={hackathon.url}
+              platform={hackathon.platform}
+            />
+          ))}
+        </div>)}
     </>
   );
 };

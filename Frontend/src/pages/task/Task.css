@@ -190,7 +190,7 @@
 }
 
 .collapse-icon.transform.rotate-90 {
-  transform: rotate(-90deg);
+  transform: rotate(-180deg);
 }
 
 .task-section-title {

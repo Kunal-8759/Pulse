@@ -71,8 +71,8 @@
 }
 
 .step-image {
-  width: 270px;
-  height: 270px;
+  width: 16rem;
+  height: 16rem;
   object-fit: contain;
   border-radius:50%;
   border : 1.5px solid var(--border);
@@ -210,14 +210,6 @@
     padding: 40px 20px 20px;
   }
 
-  .step-image-container {
-    height: 140px;
-  }
-
-  .step-image {
-    width: 140px;
-    height: 140px;
-  }
 
   .step-title {
     font-size: 1.5rem;
@@ -246,12 +238,4 @@
     height: 500px;
   }
 
-  .step-image-container {
-    height: 120px;
-  }
-
-  .step-image {
-    width: 120px;
-    height: 120px;
-  }
 }

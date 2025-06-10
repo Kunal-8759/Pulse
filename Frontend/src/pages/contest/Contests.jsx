@@ -4,6 +4,8 @@ import FilterContest from '../../components/contests/FilterContest';
 import { useInView } from 'react-intersection-observer';
 import './contestList.css';
 import { useContests } from '../../components/contests/useContestHook';
+import { Loader } from '../../components/Skelton/Loader';
+import toast, { Toaster } from 'react-hot-toast';
 
 
 const Contests = () => {
@@ -64,6 +66,12 @@ const Contests = () => {
 
   return (
     <>
+      <Toaster
+        position="bottom-right"
+        toastOptions={{
+          duration: 3000,
+        }} 
+      />
       <h1 className="contest-list-title">{filters.selectedStatus} Contests</h1>
       <div className="contest-list-container">
         <div className="contest-sidebar">
@@ -71,11 +79,14 @@ const Contests = () => {
         </div>
         <div className='contest-wrapper'>
 
-          {isError ? (
-          <div>{error.message}</div> )
-          :(
+          {
             isLoading ? (
-              <div>Contests is Loading...</div>
+              <div className='flex flex-col items-center justify-center h-full'>
+                <Loader text='Loading Contests' />
+              </div>
+              
+            ) : isError ? (
+              toast.error(error.message)
             ) : (
               <div className="contest-grid">
                 {filteredContests.map((contest, index) => (
@@ -83,19 +94,16 @@ const Contests = () => {
                 ))}
               </div>
             )
-          )
-
           }
 
+        
           
           {filteredContests.length === 0 && !isLoading && (
-            <div className="no-contests">
-              <p>No contests found for the selected filters.</p>
-            </div>
+            toast.error("No Contests found for the selected filter!")
           )}
 
           <div ref={ref} style={{ height: '30px', margin: '20px 0' }}>
-            {isFetchingNextPage && <p>Loading more contests...</p>}
+            {isFetchingNextPage && <Loader />}
           </div>
         </div>
       </div>

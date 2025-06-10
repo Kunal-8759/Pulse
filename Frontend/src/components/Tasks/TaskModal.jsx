@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import Tag from "./Tag"
 import "./TaskModal.css"
 
@@ -14,6 +14,8 @@ const TaskModal = ({ onClose, onSave, task }) => {
   const [tagInput, setTagInput] = useState("")
   const [tags, setTags] = useState([])
   const [titleError, setTitleError] = useState(false)
+  const dateInputRef = useRef(null)
+  const timeInputRef = useRef(null)
 
   useEffect(() => {
     if (task) {
@@ -22,7 +24,7 @@ const TaskModal = ({ onClose, onSave, task }) => {
       setLink(task.link || "")
       setDueDate(task.dueDate || "")
       setDueTime(task.dueTime || "")
-      setStatus(task.status || "To Do")
+      setStatus(task.status || "ToDo")
       setTags(task.tags || [])
     }
   }, [task])
@@ -65,9 +67,21 @@ const TaskModal = ({ onClose, onSave, task }) => {
     setTags(tags.filter((tag) => tag !== tagToRemove))
   }
 
+  const handleDateContainerClick = () => {
+    if (dateInputRef.current) {
+      dateInputRef.current.showPicker()
+    }
+  }
+
+  const handleTimeContainerClick = () => {
+    if (timeInputRef.current) {
+      timeInputRef.current.showPicker()
+    }
+  }
+
   return (
     <div className="modal-overlay">
-      <div className="modal-content">
+      <div className="task-modal-content">
         <div className="modal-header">
           <h2>{task ? "Edit Task" : "Create New Task"}</h2>
           <button className="close-btn" onClick={onClose}>
@@ -117,11 +131,17 @@ const TaskModal = ({ onClose, onSave, task }) => {
           <div className="form-group">
             <label htmlFor="dueDate">Due Date & Time</label>
             <div className="date-time-container">
-              <div className="date-input">
+              <div className="date-input" onClick={handleDateContainerClick}>
                 <span className="input-icon">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar mr-2 h-4 w-4"><path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M3 10h18"></path></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M8 2v4"></path>
+                    <path d="M16 2v4"></path>
+                    <rect width="18" height="18" x="3" y="4" rx="2"></rect>
+                    <path d="M3 10h18"></path>
+                  </svg>
                 </span>
                 <input
+                  ref={dateInputRef}
                   type="date"
                   id="dueDate"
                   value={dueDate}
@@ -129,11 +149,15 @@ const TaskModal = ({ onClose, onSave, task }) => {
                   placeholder="Select date"
                 />
               </div>
-              <div className="time-input">
+              <div className="time-input" onClick={handleTimeContainerClick}>
                 <span className="input-icon">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock mr-2 h-4 w-4"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                  </svg>
                 </span>
                 <input
+                  ref={timeInputRef}
                   type="time"
                   id="dueTime"
                   value={dueTime}
@@ -149,7 +173,7 @@ const TaskModal = ({ onClose, onSave, task }) => {
             <label htmlFor="status">Status</label>
             <select id="status" value={status} onChange={(e) => setStatus(e.target.value)}>
               <option value="To Do">To Do</option>
-              <option value="In Progress">InProgress</option>
+              <option value="InProgress">InProgress</option>
               <option value="Completed">Completed</option>
             </select>
           </div>

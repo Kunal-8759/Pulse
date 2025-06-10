@@ -105,6 +105,10 @@
     text-align: center;
     text-decoration: none;
     border: none;
+    display: flex;
+    gap:4px;
+    justify-content: center;
+    align-items: center;
   }
 
   
@@ -116,15 +120,19 @@
      background-color: var(--secondary); 
   }
 
-.join-contest-svg{
+/* .join-contest-svg{
     margin-right: 4px;
     position:relative;
     top: 2px;
-}
-.remind-me-svg{
+    left:4px 
+   /* font-size: 2px;
+   height:8px;
+   width:8px
+} */
+/* .remind-me-svg{
     margin-right: 4px;
     position:relative;
     top: 2px;
-}
+} */
 
   

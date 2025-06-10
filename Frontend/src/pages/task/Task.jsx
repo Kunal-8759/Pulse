@@ -17,8 +17,8 @@ const Task = () => {
   const [openSortDropdown, setOpenSortDropdown] = useState(null)
   const [collapsedSections, setCollapsedSections] = useState({
     ToDo: false,
-    InProgress: false,
-    Completed: false,
+    InProgress: true,
+    Completed: true,
   })
   const [sortOptions, setSortOptions] = useState({
     ToDo: "Due Date (Earliest)",
