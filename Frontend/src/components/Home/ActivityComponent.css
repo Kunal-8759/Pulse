@@ -114,6 +114,11 @@
     text-overflow: ellipsis;
     display: inline-block;
     max-width: 400px;
+    display: flex;
+    justify-content: start;
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
   }
   
   .activity-title:hover {
@@ -160,6 +165,12 @@
     text-overflow: ellipsis;
     display: inline-block;
     max-width: 400px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 4px;
+
   }
   
   .repo-link:hover {
@@ -167,7 +178,7 @@
   }
   
   .external-link-icon {
-    font-size: 12px;
+    font-size: 16px;
     margin-left: 2px;
   }
   

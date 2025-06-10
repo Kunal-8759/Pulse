@@ -6,6 +6,7 @@ import "./RecentActivityCard.css";
 import { ActivityList } from "../../components/Home/ActivityComponent";
 import ActivityTabNavigation from "../../components/Home/ActivityTabNavigation";
 import { getGithubActivity, getLeetcodeActivity } from "../../services/api";
+import Skelton from "../../components/Skelton/CustomSkelton";
 
 const RecentActivityCard = () => {
   const [activeTab, setActiveTab] = useState("all");
@@ -76,13 +77,13 @@ const RecentActivityCard = () => {
     return combinedData.sort((a, b) => {
       const dateA = new Date(
         a.date.split(", ")[0].split("/").reverse().join("/") +
-          " " +
-          a.date.split(", ")[1]
+        " " +
+        a.date.split(", ")[1]
       );
       const dateB = new Date(
         b.date.split(", ")[0].split("/").reverse().join("/") +
-          " " +
-          b.date.split(", ")[1]
+        " " +
+        b.date.split(", ")[1]
       );
       return dateB - dateA;
     });
@@ -114,13 +115,26 @@ const RecentActivityCard = () => {
 
       <div className="activity-container">
         {isLoading ? (
-          <div className="recent-activities loading">Loading activities...</div>
+          <div className="!space-y-4">
+            {[...Array(5)].map((_, i) => (
+              <div key={i} className=" !rounded-xl !border !text-gray-800 !shadow-sm !h-16">
+                <div className="!p-4 !h-full">
+                  <div className="!flex !justify-between !items-center !h-full">
+                    <Skelton className="!h-5 !w-3/5" />
+                    <Skelton className="!h-4 !w-1/6" />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         ) : hasError ? (
           <div className="error-state">
             Failed to load activities. Please try again.
           </div>
         ) : (
-          <ActivityList activities={getFilteredActivities()} />
+          <ActivityList
+            activities={getFilteredActivities()}
+          />
         )}
       </div>
     </div>

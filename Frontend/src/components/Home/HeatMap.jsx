@@ -23,8 +23,7 @@ const Heatmap = ({ data, isUnix, platform, streaks, error, isLoading }) => {
         </p>
       )}
       {isLoading ?
-        // <Skeleton className="w-full h-32" />
-        <CustomSkelton className={'heatmap-skelton'} />
+        <CustomSkelton className="!w-full !h-32 "/>
         :
         (<>
           <CalendarHeatmap
@@ -43,6 +42,7 @@ const Heatmap = ({ data, isUnix, platform, streaks, error, isLoading }) => {
             tooltipDataAttrs={(value) =>
               value.date ? { "data-tip": `${value.date}: ${value.count} contributions` } : null
             }
+            titleForValue={(value) => value ? `${value.count} Contribution on ${value.date}` : `0 Contribution`}
           />
 
           <div className="heatmap-legend">

@@ -1,10 +1,12 @@
 "use client";
-
 import "./LeetcodeCard.css";
 import { getLeetCodeData, getDailyProblem } from "../../services/api";
 import { useQuery } from "@tanstack/react-query";
 import DailyProblem from "../../components/Home/DailyProblem";
 import LeetcodeProgress from "../../components/Home/LeetcodeProgress";
+import Skelton from "../../components/Skelton/CustomSkelton";
+// import CustomSkelton from "../../components/CustomSkelton/CustomSkelton";
+
 
 const LeetCodeCard = () => {
   const leetcodeUsername = localStorage.getItem("leetcodeUsername");
@@ -53,21 +55,23 @@ const LeetCodeCard = () => {
 
   return (
     <>
-      {leetcodeLoading || dailyProblemLoading ? (
-        <div className="leetcode-card loading">Loading LeetCode data...</div>
-      ) : (
-        <div className="leetcode-card">
+      <div className="leetcode-card">
           <DailyProblem
             problem={dailyProblemResponse?.data}
             dailyProblemError={dailyProblemError}
+            isLoading = {dailyProblemLoading}
           />
-          <div className="divider"></div>
-          <LeetcodeProgress
-            data={leetCodeResponse?.data}
-            error={leetCodeResponse.error}
-          />
-        </div>
-      )}
+
+        <div className="divider"></div>
+
+        <LeetcodeProgress
+          data={leetCodeResponse?.data}
+          error={leetCodeResponse?.error}
+          isLoading={leetcodeLoading}
+        />
+
+      </div>
+
     </>
   );
 };

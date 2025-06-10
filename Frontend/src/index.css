@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 :root {
   --background: hsl(222, 69%, 8%);
   --foreground: hsl(210 40% 98%);

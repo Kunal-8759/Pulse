@@ -1,7 +1,8 @@
-.heatmap-skelton.MuiSkeleton-root {
-    height: 120px;
-    width: 100%;
+
+
+.custom-skelton.MuiSkeleton-root {
     background-color:var(--secondary);
-    border-radius: 20px;
-    border: 2.5px solid var(--success);
+    border-radius: 16px;
+    border: 2px solid var(--success);
+    box-shadow: 0 0 10px var(--shadow-color);
 }

@@ -1,15 +1,15 @@
 import './CustomSkelton.css'
 import { Skeleton } from '@mui/material';
 
-function CustomSkelton({className , ...props}) {
+function Skelton({className, ...props}) {
     return (
         <Skeleton
             variant="rounded"
-            className={className}
+            className={`custom-skelton ${className}`}
             {...props}
         />
 
     );
 }
 
-export default CustomSkelton;
+export default Skelton;
