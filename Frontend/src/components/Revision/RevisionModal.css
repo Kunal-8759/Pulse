@@ -216,7 +216,7 @@
   }
 
   .step-description {
-    font-size: var(--text-sm);
+    font-size: var(--text-base);
   }
 
   .step-list {

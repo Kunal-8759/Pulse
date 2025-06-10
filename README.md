@@ -106,4 +106,4 @@ The upcoming *Revision Workspace* will be a comprehensive interview preparation 
 
 ___
 
-Built with ❤️ by ([Kunal Kumar](https://www.linkedin.com/in/kunal-kumar-78094a258/)
+Built with ❤️ by [Kunal Kumar](https://www.linkedin.com/in/kunal-kumar-78094a258/)
