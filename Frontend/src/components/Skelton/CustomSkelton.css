@@ -3,6 +3,6 @@
 .custom-skelton.MuiSkeleton-root {
     background-color:var(--secondary);
     border-radius: 16px;
-    border: 2px solid var(--success);
+    border: 2px solid var(--card);
     box-shadow: 0 0 10px var(--shadow-color);
 }

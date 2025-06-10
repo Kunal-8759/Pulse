@@ -62,7 +62,7 @@ const DailyProblem = ({ problem, dailyProblemError, isLoading }) => {
                     stroke-width="2"
                     stroke-linecap="round"
                     stroke-linejoin="round"
-                    class="lucide lucide-code h-4 w-4 text-orange-500"
+                    class="lucide lucide-code h-4 w-4"
                   >
                     <polyline points="16 18 22 12 16 6"></polyline>
                     <polyline points="8 6 2 12 8 18"></polyline>
