@@ -17,7 +17,6 @@ const app = express();
 app.use(cors({
   origin: 'https://pulse-code.vercel.app' ,
   methods: ['GET', 'POST'],
-  credentials: true 
 }));
 app.use(express.json());
 app.use('/api/heatmap',heatmapRoute);
