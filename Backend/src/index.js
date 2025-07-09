@@ -15,7 +15,7 @@ const { PORT } = require('./config/config');
 
 const app = express();
 app.use(cors({
-  origin: 'https://pulse-code.vercel.app' || '*',
+  origin: 'https://pulse-code.vercel.app' ,
   methods: ['GET', 'POST'],
   credentials: true 
 }));
